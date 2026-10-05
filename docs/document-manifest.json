@@ -1,0 +1,28 @@
+{
+	"project": "minecraft-mod-picker",
+	"updated": "2026-10-05",
+	"documents": [
+		{ "path": "README.md", "title": "Описание проекта", "status": "draft" },
+		{ "path": "AGENTS.md", "title": "Правила для агента", "status": "draft" },
+		{ "path": "STATUS.md", "title": "Статус", "status": "active" },
+		{ "path": "CHANGE_HISTORY.md", "title": "История изменений", "status": "active" },
+		{ "path": "docs/README.md", "title": "Карта документов", "status": "active" },
+		{ "path": "docs/Product/README.md", "title": "Индекс Product", "status": "draft" },
+		{ "path": "docs/Product/01-context.md", "title": "Контекст", "status": "draft" },
+		{ "path": "docs/Product/02-users-and-scenarios.md", "title": "Роли и сценарии", "status": "draft" },
+		{ "path": "docs/Product/03-requirements.md", "title": "Требования и проверки", "status": "draft" },
+		{ "path": "docs/Product/04-interface-and-behavior.md", "title": "Интерфейс и поведение", "status": "draft" },
+		{ "path": "docs/Product/05-rules-and-data-meaning.md", "title": "Смысл данных и правила", "status": "draft" },
+		{ "path": "docs/Tech/README.md", "title": "Индекс Tech", "status": "draft" },
+		{ "path": "docs/Tech/01-architecture.md", "title": "Архитектура", "status": "stub" },
+		{ "path": "docs/Tech/02-running.md", "title": "Запуск", "status": "stub" },
+		{ "path": "docs/Tech/03-data.md", "title": "Данные", "status": "draft" },
+		{ "path": "docs/Tech/04-api-and-access.md", "title": "API и доступ", "status": "stub" },
+		{ "path": "docs/Tech/05-verification.md", "title": "Тесты и проверки", "status": "stub" },
+		{ "path": "docs/Tech/WORKSPACE_MAP.md", "title": "Карта кода", "status": "draft" },
+		{ "path": "docs/Service/README.md", "title": "Индекс Service", "status": "draft" },
+		{ "path": "docs/Service/decisions.md", "title": "Решения и вопросы", "status": "active" },
+		{ "path": "docs/Service/sources.md", "title": "Источники", "status": "active" },
+		{ "path": "docs/Service/verification.md", "title": "Протокол проверок", "status": "active" }
+	]
+}
