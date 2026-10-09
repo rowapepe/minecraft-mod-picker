@@ -29,23 +29,36 @@ minecraft-mod-picker/
 ├── docs/
 │   ├── README.md        карта документов
 │   ├── Product/         что строим: контекст, роли и сценарии, требования, интерфейс, правила
-│   ├── Tech/            как устроено: архитектура, данные, API, проверки
+│   ├── Tech/            как устроено: архитектура, запуск, данные, API, проверки
 │   ├── Service/         решения и вопросы, источники, протокол проверок
 │   └── document-manifest.json
 └── code/
     ├── scripts/         вспомогательные скрипты
     ├── data/            корпус описаний модов
-    ├── frontend/        интерфейс
+    ├── frontend/        интерфейс (React + Vite + TypeScript)
     ├── backend/         интеграция, поиск, вызов LLM
     ├── tests/           тесты
     └── benchmark/       тестовые запросы и расчёт метрик
 ```
 
+## Стек
+
+Интерфейс — React + Vite + TypeScript. Бэкенд — Python + FastAPI. Поиск — собственный BM25 на Python. Подробности и обоснование: [docs/Tech/01-architecture.md](docs/Tech/01-architecture.md), решение `D-08`.
+
 ## Запуск
 
 ### Макет интерфейса
 
-Команда запуска появится вместе с макетом (см. [STATUS.md](STATUS.md)).
+Нужны Node.js 20+ и npm.
+
+```bash
+cp .env.example .env     # в корне репозитория; значения для входа — в docs/Tech/02-running.md
+cd code/frontend
+npm install
+npm run dev              # http://localhost:5173
+```
+
+Бэкенда пока нет, поэтому `npm run dev` поднимает заглушку API только для разработки. Для локального входа: пользователь `player` / `player`, администратор `admin` / `admin` (впишите в `.env`). Подробности: [docs/Tech/02-running.md](docs/Tech/02-running.md).
 
 ## Документация
 
@@ -57,4 +70,4 @@ minecraft-mod-picker/
 
 ## Текущее состояние
 
-Подготовка к контрольной точке 1: документация Product и макет интерфейса. Рабочего RAG пока нет.
+Подготовка к контрольной точке 1: документация Product и интерфейс из трёх экранов в `code/frontend`. Рабочего RAG пока нет.

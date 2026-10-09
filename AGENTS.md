@@ -37,7 +37,11 @@ Minecraft Mod Picker — веб-приложение для подбора мо�
 - Выгрузка с Modrinth идёт с корректным `User-Agent` и без превышения лимита (300 запросов в минуту).
 - Ответ LLM строится только на найденных документах (`RULE-ANS-01`, `RULE-ANS-02`).
 
-## 5. Зоны ответственности
+## 5. Стек
+
+Принят в `D-08` (`docs/Service/decisions.md`): интерфейс — React + Vite + TypeScript, бэкенд — Python 3.12+ и FastAPI, поиск — собственный BM25, проверки — pytest и Vitest. Контракт API — `docs/Tech/04-api-and-access.md`.
+
+## 6. Зоны ответственности
 
 - Верзаков Никита: `docs/Product`, `code/frontend`.
 - Прощаев Алексей: `code/backend`, `docs/Tech/01-architecture.md`, `02-running.md`, `04-api-and-access.md`.
