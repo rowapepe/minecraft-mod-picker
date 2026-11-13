@@ -16,6 +16,18 @@ export interface SearchResponse {
   answer: string | null;
 }
 
+export interface DayCount {
+  date: string;
+  count: number;
+}
+
+export interface StatsResponse {
+  requests: number;
+  logins: number;
+  byDay: DayCount[];
+  noResults: number;
+}
+
 export class ApiError extends Error {
   constructor(public status: number) {
     super(`API ${status}`);
@@ -42,5 +54,5 @@ export const api = {
   logout: () => request<void>('/api/auth/logout', { method: 'POST' }),
   search: (query: string) =>
     request<SearchResponse>('/api/search', { method: 'POST', body: JSON.stringify({ query }) }),
-  stats: () => request<{ requests: number }>('/api/admin/stats'),
+  stats: () => request<StatsResponse>('/api/admin/stats'),
 };

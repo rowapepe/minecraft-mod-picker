@@ -52,6 +52,11 @@ export const LogoutIcon = ({ size }: P) => (
     <path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3M16 8l4 4-4 4M20 12H9" />
   </Icon>
 );
+export const TrashIcon = ({ size = 18 }: P) => (
+  <Icon size={size}>
+    <path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6" />
+  </Icon>
+);
 export const SearchIcon = ({ size }: P) => (
   <Icon size={size}>
     <circle cx="11" cy="11" r="7" />
@@ -66,6 +71,17 @@ export const SendIcon = ({ size }: P) => (
 export const ExternalIcon = ({ size = 16 }: P) => (
   <Icon size={size}>
     <path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4" />
+  </Icon>
+);
+export const SunIcon = ({ size }: P) => (
+  <Icon size={size}>
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+  </Icon>
+);
+export const MoonIcon = ({ size }: P) => (
+  <Icon size={size}>
+    <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5z" />
   </Icon>
 );
 export const AlertIcon = ({ size = 18 }: P) => (

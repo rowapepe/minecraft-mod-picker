@@ -95,6 +95,25 @@ function readBody(req: IncomingMessage): Promise<Record<string, unknown>> {
   });
 }
 
+/** Ключ дня и последние семь дней для аналитики (RULE-ADM-05). */
+function dayKey(date = new Date()): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function lastDays(byDay: Map<string, number>, size = 7): Array<{ date: string; count: number }> {
+  const days: Array<{ date: string; count: number }> = [];
+  for (let offset = size - 1; offset >= 0; offset -= 1) {
+    const date = new Date();
+    date.setDate(date.getDate() - offset);
+    const key = dayKey(date);
+    days.push({ date: key, count: byDay.get(key) ?? 0 });
+  }
+  return days;
+}
+
 function send(res: ServerResponse, status: number, body?: unknown, headers: Record<string, string> = {}) {
   res.statusCode = status;
   if (body !== undefined) res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -110,6 +129,9 @@ export function apiStub(env: Record<string, string>): Plugin {
 
   const sessions = new Map<string, Role>();
   let requests = 0;
+  let logins = 0;
+  let noResults = 0;
+  const byDay = new Map<string, number>();
 
   const roleOf = (req: IncomingMessage): Role | null => {
     const m = /(?:^|;\s*)session=([^;]+)/.exec(req.headers.cookie ?? '');
@@ -134,6 +156,7 @@ export function apiStub(env: Record<string, string>): Plugin {
           const { login, password } = await readBody(req);
           const acc = accounts.find((a) => a.login === login && a.password === password);
           if (!acc) return send(res, 401, { detail: 'invalid' });
+          logins += 1; // RULE-ADM-04: только успешный вход
           const token = randomBytes(24).toString('hex');
           sessions.set(token, acc.role);
           return send(res, 200, { role: acc.role }, { 'Set-Cookie': `session=${token}; HttpOnly; Path=/; SameSite=Lax` });
@@ -152,10 +175,15 @@ export function apiStub(env: Record<string, string>): Plugin {
           const query = String((await readBody(req)).query ?? '');
           if (!query.trim() || query.length > 500) return send(res, 400, { detail: 'bad query' });
           requests += 1; // RULE-ADM-02: считается независимо от исхода
+          const today = dayKey(); // RULE-ADM-05
+          byDay.set(today, (byDay.get(today) ?? 0) + 1);
           await new Promise((r) => setTimeout(r, 1200));
           const q = query.trim().toLowerCase();
           if (q === '!ошибка') return send(res, 500, { detail: 'Не удалось выполнить поиск' });
-          if (q === '!пусто') return send(res, 200, { mods: [], answer: null });
+          if (q === '!пусто') {
+            noResults += 1; // RULE-ADM-06
+            return send(res, 200, { mods: [], answer: null });
+          }
           const set = SETS[detectCostume(query).id];
           const mods = set.mods.map((m) => ({ ...m, url: `https://modrinth.com/mod/${m.slug}` }));
           return send(res, 200, { mods, answer: q === '!безответа' ? null : set.answer });
@@ -163,7 +191,7 @@ export function apiStub(env: Record<string, string>): Plugin {
         if (url === '/api/admin/stats' && req.method === 'GET') {
           if (!role) return send(res, 401, { detail: 'no session' });
           if (role !== 'admin') return send(res, 403, { detail: 'forbidden' });
-          return send(res, 200, { requests });
+          return send(res, 200, { requests, logins, byDay: lastDays(byDay), noResults });
         }
         return send(res, 404, { detail: 'not found' });
       });

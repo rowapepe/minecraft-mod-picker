@@ -1,26 +1,46 @@
 /* Цвета и размеры интерфейса (docs/Product/04-interface-and-behavior.md, раздел 10). */
 :root {
-  color-scheme: dark;
+	color-scheme: dark;
 
-  --accent: #1bd96a;
-  --on-accent: #05210f;
+	--accent: #1bd96a;
+	--accent-ink: #1bd96a;
+	--on-accent: #05210f;
 
-  --bg: #16181c;
-  --bg-sidebar: #1b1d22;
-  --bg-card: #22252a;
-  --bg-raised: #26292f;
-  --bg-hover: #2d3036;
-  --border: #2d3036;
-  --border-dashed: #3a3e46;
+	--bg: #16181c;
+	--bg-sidebar: #1b1d22;
+	--bg-card: #22252a;
+	--bg-raised: #26292f;
+	--bg-hover: #2d3036;
+	--border: #2d3036;
+	--border-dashed: #3a3e46;
 
-  --text: #ecf9fb;
-  --text-2: #b0bac5;
-  --text-3: #8b97a5;
-  --text-placeholder: #7d8896;
-  --danger: #ff8f8f;
+	--text: #ecf9fb;
+	--text-2: #b0bac5;
+	--text-3: #8b97a5;
+	--text-placeholder: #7d8896;
+	--danger: #ff8f8f;
 
-  --radius-card: 20px;
-  --radius-field: 12px;
+	--radius-card: 20px;
+	--radius-field: 12px;
 
-  --font: 'Inter Variable', Inter, system-ui, sans-serif;
+	--font: "Inter Variable", Inter, system-ui, sans-serif;
+}
+
+:root[data-theme="light"] {
+	color-scheme: light;
+	--accent: #1bd96a;
+	--accent-ink: #0b7a3d;
+	--on-accent: #05210f;
+	--bg: #f5f7f6;
+	--bg-sidebar: #ffffff;
+	--bg-card: #ffffff;
+	--bg-raised: #f0f2f1;
+	--bg-hover: #e6e9e7;
+	--border: #d8ddda;
+	--border-dashed: #b9c2bd;
+	--text: #1b1d22;
+	--text-2: #46514b;
+	--text-3: #68746d;
+	--text-placeholder: #7d8882;
+	--danger: #bd3434;
 }

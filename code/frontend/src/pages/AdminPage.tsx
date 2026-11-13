@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { api } from "../api"
-import { AlertIcon, CheckIcon, CrossIcon, LogoutIcon, SearchIcon, UserIcon } from "../components/Icons"
+import { api, type StatsResponse } from "../api"
+import { AlertIcon, ChatIcon, CheckIcon, CrossIcon, LogoutIcon, SearchIcon, UserIcon } from "../components/Icons"
 import { LogoMark } from "../components/Logo"
-import { formatCount } from "../library/format"
+import { ThemeToggle } from "../components/ThemeToggle"
+import { formatCount, formatDay, formatPercent } from "../library/format"
 
-type Stats = { state: "loading" } | { state: "error" } | { state: "ready"; requests: number }
+type Stats = { state: "loading" } | { state: "error" } | { state: "ready"; data: StatsResponse }
 
-const FUTURE = [
-	{ title: "Запросы по дням", sub: "Динамика нагрузки" },
-	{ title: "Число входов", sub: "Как часто заходят в приложение" },
-	{ title: "Доля запросов без результатов", sub: "Где поиск не находит моды" }
-]
-
-/** Админ-панель (04, раздел 8): числовая аналитика (RULE-ADM-01). */
+/** Админ-панель (04, раздел 8): числовая аналитика (RULE-ADM-01…06). */
 export function AdminPage() {
 	const navigate = useNavigate()
 	const [stats, setStats] = useState<Stats>({ state: "loading" })
@@ -23,7 +18,7 @@ export function AdminPage() {
 		let alive = true
 		api
 			.stats()
-			.then((r) => alive && setStats({ state: "ready", requests: r.requests }))
+			.then((data) => alive && setStats({ state: "ready", data }))
 			.catch(() => alive && setStats({ state: "error" }))
 		return () => {
 			alive = false
@@ -43,6 +38,7 @@ export function AdminPage() {
 					<span className="role-tag">Админ-панель</span>
 				</div>
 				<div className="admin-actions">
+					<ThemeToggle />
 					<div className="who">
 						<div className="whoami-avatar">
 							<UserIcon />
@@ -73,7 +69,7 @@ export function AdminPage() {
 
 						{stats.state === "ready" && (
 							<div className="metric-value-wrap">
-								<div className="metric-value">{formatCount(stats.requests)}</div>
+								<div className="metric-value">{formatCount(stats.data.requests)}</div>
 								<div className="metric-note">Каждая отправка текста на поиск, независимо от исхода</div>
 							</div>
 						)}
@@ -116,21 +112,83 @@ export function AdminPage() {
 					</aside>
 				</div>
 
-				<section className="future" aria-labelledby="m3">
-					<div className="future-head">
-						<h2 id="m3">Возможные показатели</h2>
-						<span className="pill">не утверждено</span>
-					</div>
-					<div className="future-grid">
-						{FUTURE.map((f) => (
-							<div className="future-card" key={f.title}>
-								<span className="future-title">{f.title}</span>
-								<span className="future-sub">{f.sub}</span>
+				{stats.state === "ready" && <ExtraMetrics data={stats.data} />}
+
+				{stats.state === "loading" && (
+					<section className="metrics-extra" aria-hidden="true">
+						{["Число входов", "Доля запросов без результатов", "Запросы по дням"].map((title) => (
+							<div className="card stat-card" key={title}>
+								<span className="stat-title">{title}</span>
+								<div className="skel-block" />
 							</div>
 						))}
-					</div>
-				</section>
+					</section>
+				)}
 			</main>
 		</div>
+	)
+}
+
+function ExtraMetrics({ data }: { data: StatsResponse }) {
+	const maxDay = Math.max(1, ...data.byDay.map((d) => d.count))
+	return (
+		<section className="metrics-extra" aria-label="Другие показатели">
+			<article className="card stat-card" aria-labelledby="m4">
+				<div className="stat-head">
+					<div className="stat-icon">
+						<UserIcon size={20} />
+					</div>
+					<h2 id="m4" className="stat-title">
+						Число входов
+					</h2>
+				</div>
+				<div className="stat-value">{formatCount(data.logins)}</div>
+				<div className="stat-note">Успешные входы за всё время</div>
+			</article>
+
+			<article className="card stat-card" aria-labelledby="m5">
+				<div className="stat-head">
+					<div className="stat-icon">
+						<CrossIcon size={20} />
+					</div>
+					<h2 id="m5" className="stat-title">
+						Доля запросов без результатов
+					</h2>
+				</div>
+				<div className="stat-value">{formatPercent(data.noResults, data.requests)}</div>
+				<div className="stat-note">
+					{formatCount(data.noResults)} из {formatCount(data.requests)} запросов
+				</div>
+			</article>
+
+			<article className="card stat-card days" aria-labelledby="m6">
+				<div className="stat-head">
+					<div className="stat-icon">
+						<ChatIcon size={20} />
+					</div>
+					<h2 id="m6" className="stat-title">
+						Запросы по дням
+					</h2>
+				</div>
+				{data.byDay.length === 0 ? (
+					<p className="stat-note">Пока нет данных</p>
+				) : (
+					<div className="day-chart">
+						{data.byDay.map((day) => {
+							const width = day.count === 0 ? 0 : Math.max(4, Math.round((day.count / maxDay) * 100))
+							return (
+								<div className="day-row" key={day.date}>
+									<span className="day-name">{formatDay(day.date)}</span>
+									<span className="day-track">
+										<span className="day-fill" style={{ width: `${width}%` }} />
+									</span>
+									<span className="day-count">{formatCount(day.count)}</span>
+								</div>
+							)
+						})}
+					</div>
+				)}
+			</article>
+		</section>
 	)
 }

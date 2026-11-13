@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { MAX_QUERY_LENGTH, clampQuery, isBlank, shortTitle } from './query';
-import { formatCount } from './format';
+import { formatCount, formatDay, formatPercent } from './format';
 
 describe('проверка запроса', () => {
   it('пустой и пробельный запрос — пустой (RULE-UI-01)', () => {
@@ -26,5 +26,24 @@ describe('formatCount', () => {
   it('ноль и группы цифр', () => {
     expect(formatCount(0)).toBe('0');
     expect(formatCount(1284).replace(/\s/g, ' ')).toBe('1 284');
+  });
+});
+
+describe('formatPercent (RULE-ADM-06)', () => {
+  it('доля в процентах с округлением до целого', () => {
+    expect(formatPercent(5, 42)).toBe('12%');
+    expect(formatPercent(1, 4)).toBe('25%');
+  });
+
+  it('ноль при отсутствии запросов', () => {
+    expect(formatPercent(0, 0)).toBe('0%');
+    expect(formatPercent(3, 0)).toBe('0%');
+  });
+});
+
+describe('formatDay', () => {
+  it('подписывает дату и не падает на некорректной', () => {
+    expect(formatDay('2026-11-13')).toMatch(/13/);
+    expect(formatDay('не дата')).toBe('не дата');
   });
 });

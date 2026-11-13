@@ -1,6 +1,6 @@
 {
 	"project": "minecraft-mod-picker",
-	"updated": "2026-10-09",
+	"updated": "2026-11-13",
 	"documents": [
 		{ "path": "README.md", "title": "Описание проекта", "status": "draft" },
 		{ "path": "AGENTS.md", "title": "Правила для агента", "status": "draft" },

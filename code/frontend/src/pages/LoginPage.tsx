@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { api } from '../api';
 import { AlertIcon, SpinnerIcon } from '../components/Icons';
 import { LogoMark } from '../components/Logo';
+import { ThemeToggle } from '../components/ThemeToggle';
 import { BASE } from '../mascot/costumes';
 import { Zombie } from '../mascot/Mascot';
 
@@ -49,6 +50,8 @@ export function LoginPage() {
 
   return (
     <div className="login">
+      <ThemeToggle className="theme-fab" />
+
       <section className="login-hero grid-bg">
         <div className="brand">
           <LogoMark size={36} />
