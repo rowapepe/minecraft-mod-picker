@@ -6,13 +6,48 @@
  * Особые запросы для проверки состояний: «!пусто», «!ошибка», «!безответа».
  */
 import { randomBytes } from 'node:crypto';
+import { mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import type { IncomingMessage, ServerResponse } from 'node:http';
+import { dirname, resolve } from 'node:path';
 import type { Plugin } from 'vite';
 import { detectCostume } from '../src/mascot/detect';
 import type { CostumeId } from '../src/mascot/costumes';
 
 type Role = 'user' | 'admin';
 interface StubMod { slug: string; title: string; description: string; categories: string[] }
+
+/** Метрики, которые заглушка сохраняет между перезапусками (D-15, RULE-ADM-03). */
+interface StoredAnalytics {
+  requests: number;
+  logins: number;
+  noResults: number;
+  byDay: Record<string, number>;
+}
+
+const emptyAnalytics = (): StoredAnalytics => ({ requests: 0, logins: 0, noResults: 0, byDay: {} });
+
+const isCount = (value: unknown): value is number =>
+  typeof value === 'number' && Number.isFinite(value) && value >= 0;
+
+function readAnalytics(file: string): StoredAnalytics {
+  try {
+    const raw = JSON.parse(readFileSync(file, 'utf8')) as Partial<StoredAnalytics>;
+    const byDay: Record<string, number> = {};
+    if (raw.byDay && typeof raw.byDay === 'object') {
+      for (const [date, count] of Object.entries(raw.byDay)) {
+        if (/^\d{4}-\d{2}-\d{2}$/.test(date) && isCount(count)) byDay[date] = Math.floor(count);
+      }
+    }
+    return {
+      requests: isCount(raw.requests) ? Math.floor(raw.requests) : 0,
+      logins: isCount(raw.logins) ? Math.floor(raw.logins) : 0,
+      noResults: isCount(raw.noResults) ? Math.floor(raw.noResults) : 0,
+      byDay,
+    };
+  } catch {
+    return emptyAnalytics();
+  }
+}
 
 const SETS: Record<CostumeId, { answer: string; mods: StubMod[] }> = {
   base: {
@@ -128,10 +163,6 @@ export function apiStub(env: Record<string, string>): Plugin {
   ].filter((a) => a.login && a.password);
 
   const sessions = new Map<string, Role>();
-  let requests = 0;
-  let logins = 0;
-  let noResults = 0;
-  const byDay = new Map<string, number>();
 
   const roleOf = (req: IncomingMessage): Role | null => {
     const m = /(?:^|;\s*)session=([^;]+)/.exec(req.headers.cookie ?? '');
@@ -147,6 +178,27 @@ export function apiStub(env: Record<string, string>): Plugin {
           '[dev-stub] USER_LOGIN/USER_PASSWORD/ADMIN_LOGIN/ADMIN_PASSWORD не заданы в .env: вход невозможен',
         );
       }
+
+      // Файл живёт вне Git (.dev-stub/): запросы и входы переживают перезапуск dev-сервера.
+      const analyticsFile = resolve(server.config.root, '.dev-stub/analytics.json');
+      const saved = readAnalytics(analyticsFile);
+      let requests = saved.requests;
+      let logins = saved.logins;
+      let noResults = saved.noResults;
+      const byDay = new Map<string, number>(Object.entries(saved.byDay));
+
+      const saveAnalytics = () => {
+        try {
+          mkdirSync(dirname(analyticsFile), { recursive: true });
+          const tmp = `${analyticsFile}.tmp`;
+          const body: StoredAnalytics = { requests, logins, noResults, byDay: Object.fromEntries(byDay) };
+          writeFileSync(tmp, JSON.stringify(body), 'utf8');
+          renameSync(tmp, analyticsFile);
+        } catch (error) {
+          server.config.logger.warn(`[dev-stub] не удалось сохранить аналитику: ${String(error)}`);
+        }
+      };
+
       server.middlewares.use(async (req, res, next) => {
         const url = (req.url ?? '').split('?')[0];
         if (!url.startsWith('/api/')) return next();
@@ -159,6 +211,7 @@ export function apiStub(env: Record<string, string>): Plugin {
           logins += 1; // RULE-ADM-04: только успешный вход
           const token = randomBytes(24).toString('hex');
           sessions.set(token, acc.role);
+          saveAnalytics();
           return send(res, 200, { role: acc.role }, { 'Set-Cookie': `session=${token}; HttpOnly; Path=/; SameSite=Lax` });
         }
         if (url === '/api/auth/logout' && req.method === 'POST') {
@@ -177,11 +230,13 @@ export function apiStub(env: Record<string, string>): Plugin {
           requests += 1; // RULE-ADM-02: считается независимо от исхода
           const today = dayKey(); // RULE-ADM-05
           byDay.set(today, (byDay.get(today) ?? 0) + 1);
+          saveAnalytics();
           await new Promise((r) => setTimeout(r, 1200));
           const q = query.trim().toLowerCase();
           if (q === '!ошибка') return send(res, 500, { detail: 'Не удалось выполнить поиск' });
           if (q === '!пусто') {
             noResults += 1; // RULE-ADM-06
+            saveAnalytics();
             return send(res, 200, { mods: [], answer: null });
           }
           const set = SETS[detectCostume(query).id];

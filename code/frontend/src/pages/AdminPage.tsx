@@ -8,20 +8,50 @@ import { formatCount, formatDay, formatPercent } from "../library/format"
 
 type Stats = { state: "loading" } | { state: "error" } | { state: "ready"; data: StatsResponse }
 
-/** Админ-панель (04, раздел 8): числовая аналитика (RULE-ADM-01…06). */
+const REFRESH_MS = 10_000
+
+/** Админ-панель (04, раздел 8): числовая аналитика (RULE-ADM-01…07). */
 export function AdminPage() {
 	const navigate = useNavigate()
 	const [stats, setStats] = useState<Stats>({ state: "loading" })
+	const [updatedAt, setUpdatedAt] = useState<Date | null>(null)
 
 	useEffect(() => {
 		document.title = "Админ-панель"
 		let alive = true
-		api
-			.stats()
-			.then((data) => alive && setStats({ state: "ready", data }))
-			.catch(() => alive && setStats({ state: "error" }))
+		let inFlight = false
+		let timer: number | undefined
+
+		const load = async () => {
+			if (inFlight) return
+			inFlight = true
+			try {
+				const data = await api.stats()
+				if (!alive) return
+				setStats({ state: "ready", data })
+				setUpdatedAt(new Date())
+			} catch {
+				// При ошибке обновления последние числа остаются на экране (RULE-ADM-07).
+				if (alive) setStats((prev) => (prev.state === "ready" ? prev : { state: "error" }))
+			} finally {
+				inFlight = false
+			}
+		}
+
+		void load()
+		timer = window.setInterval(() => {
+			if (document.visibilityState === "visible") void load()
+		}, REFRESH_MS)
+
+		const onVisibility = () => {
+			if (document.visibilityState === "visible") void load()
+		}
+		document.addEventListener("visibilitychange", onVisibility)
+
 		return () => {
 			alive = false
+			if (timer !== undefined) window.clearInterval(timer)
+			document.removeEventListener("visibilitychange", onVisibility)
 		}
 	}, [])
 
@@ -55,7 +85,12 @@ export function AdminPage() {
 			<main className="admin-main">
 				<div className="admin-head">
 					<h1>Админ-панель</h1>
-					<p>Числовые показатели использования приложения. Новые значения появляются после обновления страницы.</p>
+					<p>Числовые показатели использования приложения. Данные обновляются автоматически.</p>
+					{updatedAt && (
+						<p className="admin-updated">
+							Обновлено в {updatedAt.toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+						</p>
+					)}
 				</div>
 
 				<div className="metric-row">
