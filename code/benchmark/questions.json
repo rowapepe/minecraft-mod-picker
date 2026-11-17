@@ -1,0 +1,183 @@
+{
+  "about": "Тестовый набор GAP-18: 10 обычных вопросов (не менее трёх релевантных документов и эталон) и 5 вопросов-ловушек (ответа в корпусе нет, ожидается отказ). question — как спросил бы игрок; query — английский запрос, который получает поиск после перевода (GAP-01, пока переведён вручную). relevant — bench_id из corpus.jsonl. Разметка — черновик, проверяет Кубанов.",
+  "k": 5,
+  "questions": [
+    {
+      "id": "Q01",
+      "type": "normal",
+      "topic": "фермерство и урожай",
+      "question": "Хочу быстрее собирать урожай и чтобы семена сажались обратно сами",
+      "query": "collect the harvest quicker and plant the seeds back without doing it by hand",
+      "relevant": [
+        "D01",
+        "D02",
+        "D03"
+      ],
+      "reference": "RightClickHarvest — сбор урожая правым кликом с автоматической посадкой семян; Smarter Farmers — жители-фермеры сами пересаживают нужные семена; Farm & Charm — удобрения, улучшенная почва, разбрызгиватели и другие фермерские блоки."
+    },
+    {
+      "id": "Q02",
+      "type": "normal",
+      "topic": "готовка и напитки",
+      "question": "Хочу готовить в игре разные блюда и варить напитки",
+      "query": "prepare different dishes in a kitchen and brew drinks",
+      "relevant": [
+        "D03",
+        "D04",
+        "D05",
+        "D06"
+      ],
+      "reference": "Farmer's Delight — простая система готовки сытных блюд; Kaleidoscope Cookery — новая система готовки и рецепты; Herbal Brews — чай и кофе: сушка листьев и заваривание в чайнике; Farm & Charm — фермерская кухня с мясорубкой и кастрюлями."
+    },
+    {
+      "id": "Q03",
+      "type": "normal",
+      "topic": "хранение предметов",
+      "question": "Сундуков уже не хватает, хочу удобно хранить кучу вещей и быстро находить нужное",
+      "query": "chests are not enough, need a way to keep a huge amount of things and quickly find what I need",
+      "relevant": [
+        "D07",
+        "D08",
+        "D09"
+      ],
+      "reference": "Tom's Simple Storage — терминал хранения и крафта, объединяющий сундуки; Sophisticated Storage — бочки и сундуки нескольких уровней с улучшениями; Applied Energistics 2 — цифровая сеть хранения с автокрафтом."
+    },
+    {
+      "id": "Q04",
+      "type": "normal",
+      "topic": "производительность",
+      "question": "Игра тормозит на слабом ноутбуке, хочу больше кадров и чтобы она ела меньше памяти",
+      "query": "the game is slow on my old laptop, I want more frames per second and lower RAM consumption",
+      "relevant": [
+        "D10",
+        "D11",
+        "D12"
+      ],
+      "reference": "Sodium — новый движок отрисовки, заметно поднимает частоту кадров; Lithium — оптимизация игровой логики без изменения механик; FerriteCore — снижает потребление памяти."
+    },
+    {
+      "id": "Q05",
+      "type": "normal",
+      "topic": "графика и эффекты",
+      "question": "Хочу, чтобы игра выглядела красивее: освещение, эффекты, всякие частицы",
+      "query": "make the game look nicer with better lighting and extra visual effects",
+      "relevant": [
+        "D13",
+        "D14",
+        "D15"
+      ],
+      "reference": "Iris — загрузчик шейдеров; LambDynamicLights — динамический свет от факела в руке и горящих существ; Visuality — новые частицы и мелкие визуальные улучшения."
+    },
+    {
+      "id": "Q06",
+      "type": "normal",
+      "topic": "магия",
+      "question": "Хочу играть за волшебника и колдовать",
+      "query": "play as a sorcerer and cast powerful spells",
+      "relevant": [
+        "D16",
+        "D17",
+        "D18"
+      ],
+      "reference": "Iron's Spells 'n Spellbooks — более 100 заклинаний, книги заклинаний и броня волшебника; Wizards — классы волшебника с магией огня, льда и арканы; Goety — некромантия, тёмные ритуалы и призыв слуг."
+    },
+    {
+      "id": "Q07",
+      "type": "normal",
+      "topic": "генерация мира",
+      "question": "Хочу, чтобы мир был разнообразнее: другие природные зоны, высокие горы, необычные леса",
+      "query": "a more diverse landscape with new kinds of terrain, huge mountains and unusual forests",
+      "relevant": [
+        "D19",
+        "D20",
+        "D21"
+      ],
+      "reference": "Terralith — почти 100 новых биомов из ванильных блоков; Biomes O' Plenty — более 50 биомов с новыми деревьями и растениями; Tectonic — переработка формы рельефа: более высокий, величественный и разнообразный ландшафт."
+    },
+    {
+      "id": "Q08",
+      "type": "normal",
+      "topic": "постройки и подземелья",
+      "question": "Хочу, чтобы в путешествиях попадались интересные места: заброшенные подземелья, новые деревни",
+      "query": "discover interesting places while travelling, like abandoned underground ruins and new settlements",
+      "relevant": [
+        "D22",
+        "D23",
+        "D24",
+        "D25"
+      ],
+      "reference": "YUNG's Better Dungeons — переработанные подземелья и три новых; Dungeons and Taverns — таверны, башни и подземелья в стиле ванильной игры; Towns and Towers — новые деревни, аванпосты разбойников и корабли; Cataclysm — сложные подземелья с боссами."
+    },
+    {
+      "id": "Q09",
+      "type": "normal",
+      "topic": "боссы и оружие",
+      "question": "Хочу сражаться с сильными боссами и найти новое оружие",
+      "query": "fight strong bosses and get new kinds of weapons",
+      "relevant": [
+        "D25",
+        "D26",
+        "D27"
+      ],
+      "reference": "Cataclysm — сложные бои с боссами и мощное снаряжение; Mowzie's Mobs — новые существа и боссы с уникальным поведением и их магическими способностями; Simply Swords — копья, глефы, катаны, молоты и другое оружие."
+    },
+    {
+      "id": "Q10",
+      "type": "normal",
+      "topic": "карты и перемещение",
+      "question": "Постоянно теряюсь в мире и не могу найти дорогу домой",
+      "query": "I always get lost in the world and cannot find the way back to my house",
+      "relevant": [
+        "D28",
+        "D29",
+        "D30"
+      ],
+      "reference": "Xaero's Minimap — мини-карта в углу экрана и путевые точки; Xaero's World Map — полноэкранная карта исследованного мира; Waystones — путевые камни для телепорта между ними, замена /home."
+    },
+    {
+      "id": "T01",
+      "type": "trap",
+      "topic": "самолёты",
+      "question": "Какой мод добавляет самолёты, чтобы летать над миром?",
+      "query": "a mod that adds airplanes to fly over the world",
+      "relevant": [],
+      "reference": "В описаниях найденных модов нет мода с самолётами."
+    },
+    {
+      "id": "T02",
+      "type": "trap",
+      "topic": "машины",
+      "question": "Нужен мод на машины, чтобы ездить по дорогам",
+      "query": "drive cars on roads",
+      "relevant": [],
+      "reference": "В описаниях найденных модов нет мода с машинами."
+    },
+    {
+      "id": "T03",
+      "type": "trap",
+      "topic": "покемоны",
+      "question": "Есть мод, чтобы ловить покемонов и устраивать бои?",
+      "query": "catch pokemon and battle with them",
+      "relevant": [],
+      "reference": "В описаниях найденных модов нет мода с покемонами."
+    },
+    {
+      "id": "T04",
+      "type": "trap",
+      "topic": "голосовой чат",
+      "question": "Хочу разговаривать голосом с друзьями на сервере",
+      "query": "talk to friends with a microphone on a multiplayer server",
+      "relevant": [],
+      "reference": "В описаниях найденных модов нет голосового чата."
+    },
+    {
+      "id": "T05",
+      "type": "trap",
+      "topic": "огнестрельное оружие",
+      "question": "Нужно огнестрельное оружие: автоматы и пистолеты",
+      "query": "firearms such as rifles and pistols",
+      "relevant": [],
+      "reference": "В описаниях найденных модов нет огнестрельного оружия."
+    }
+  ]
+}

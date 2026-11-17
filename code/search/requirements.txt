@@ -1,0 +1,3 @@
+# Зависимости модуля поиска и тестов (python -m pip install -r code/search/requirements.txt)
+simplemma==2.0.0
+pytest==9.2.0

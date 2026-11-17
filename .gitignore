@@ -221,3 +221,6 @@ __marimo__/
 node_modules/
 dist/
 .dev-stub/
+
+# Индекс BM25 строится из корпуса: python -m search build (из code/)
+code/data/index.json

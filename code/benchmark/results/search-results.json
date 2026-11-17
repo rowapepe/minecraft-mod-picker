@@ -1,0 +1,1338 @@
+{
+  "run_at": "2026-11-17T16:05:12+00:00",
+  "config": "базовая: лемматизация, k1 = 1.2, b = 0.75",
+  "k": 5,
+  "questions": {
+    "Q01": {
+      "type": "normal",
+      "query": "collect the harvest quicker and plant the seeds back without doing it by hand",
+      "relevant": [
+        "D01",
+        "D02",
+        "D03"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D01",
+          "title": "RightClickHarvest",
+          "score": 11.919,
+          "relevant": true,
+          "contributions": {
+            "harvest": 4.418,
+            "plant": 2.144,
+            "seed": 2.144,
+            "without": 1.604,
+            "do": 0.762,
+            "by": 0.575,
+            "and": 0.167,
+            "the": 0.105
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D02",
+          "title": "Smarter Farmers (farmers replant)",
+          "score": 11.831,
+          "relevant": true,
+          "contributions": {
+            "harvest": 3.556,
+            "plant": 3.085,
+            "seed": 3.085,
+            "do": 0.774,
+            "by": 0.756,
+            "it": 0.305,
+            "and": 0.173,
+            "the": 0.098
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D06",
+          "title": "[Let's Do] HerbalBrews",
+          "score": 11.053,
+          "relevant": false,
+          "contributions": {
+            "collect": 3.351,
+            "plant": 2.302,
+            "back": 2.302,
+            "without": 1.722,
+            "do": 0.782,
+            "it": 0.313,
+            "and": 0.175,
+            "the": 0.105
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D16",
+          "title": "Iron's Spells 'n Spellbooks",
+          "score": 7.202,
+          "relevant": false,
+          "contributions": {
+            "collect": 3.565,
+            "back": 2.449,
+            "do": 0.586,
+            "it": 0.333,
+            "and": 0.173,
+            "the": 0.096
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D26",
+          "title": "Mowzie's Mobs",
+          "score": 7.13,
+          "relevant": false,
+          "contributions": {
+            "plant": 1.653,
+            "seed": 1.653,
+            "quick": 1.537,
+            "by": 0.86,
+            "do": 0.706,
+            "it": 0.441,
+            "and": 0.174,
+            "the": 0.106
+          }
+        }
+      ]
+    },
+    "Q02": {
+      "type": "normal",
+      "query": "prepare different dishes in a kitchen and brew drinks",
+      "relevant": [
+        "D03",
+        "D04",
+        "D05",
+        "D06"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D06",
+          "title": "[Let's Do] HerbalBrews",
+          "score": 9.861,
+          "relevant": true,
+          "contributions": {
+            "brew": 4.505,
+            "kitchen": 2.903,
+            "different": 1.796,
+            "in": 0.38,
+            "and": 0.175,
+            "a": 0.102
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D04",
+          "title": "Farmer's Delight",
+          "score": 7.794,
+          "relevant": true,
+          "contributions": {
+            "prepare": 3.11,
+            "kitchen": 2.695,
+            "different": 1.337,
+            "in": 0.372,
+            "and": 0.176,
+            "a": 0.104
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D03",
+          "title": "[Let's Do] Farm & Charm",
+          "score": 7.253,
+          "relevant": true,
+          "contributions": {
+            "dish": 4.059,
+            "kitchen": 2.923,
+            "and": 0.177,
+            "a": 0.094
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D26",
+          "title": "Mowzie's Mobs",
+          "score": 4.57,
+          "relevant": false,
+          "contributions": {
+            "prepare": 1.537,
+            "brew": 1.332,
+            "different": 1.035,
+            "in": 0.388,
+            "and": 0.174,
+            "a": 0.103
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D18",
+          "title": "Goety - The Dark Arts",
+          "score": 2.503,
+          "relevant": false,
+          "contributions": {
+            "brew": 2.225,
+            "and": 0.176,
+            "a": 0.102
+          }
+        }
+      ]
+    },
+    "Q03": {
+      "type": "normal",
+      "query": "chests are not enough, need a way to keep a huge amount of things and quickly find what I need",
+      "relevant": [
+        "D07",
+        "D08",
+        "D09"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D26",
+          "title": "Mowzie's Mobs",
+          "score": 15.066,
+          "relevant": false,
+          "contributions": {
+            "enough": 2.085,
+            "keep": 1.84,
+            "i": 1.618,
+            "huge": 1.537,
+            "quickly": 1.537,
+            "way": 1.393,
+            "find": 1.322,
+            "amount": 0.954,
+            "what": 0.868,
+            "not": 0.743,
+            "need": 0.508,
+            "of": 0.244,
+            "and": 0.174,
+            "to": 0.104,
+            "a": 0.103,
+            "be": 0.034
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D24",
+          "title": "Towns and Towers",
+          "score": 11.379,
+          "relevant": false,
+          "contributions": {
+            "chest": 1.912,
+            "thing": 1.713,
+            "i": 1.52,
+            "find": 1.355,
+            "what": 1.241,
+            "way": 1.172,
+            "not": 0.986,
+            "need": 0.824,
+            "of": 0.242,
+            "and": 0.177,
+            "a": 0.102,
+            "to": 0.101,
+            "be": 0.034
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D28",
+          "title": "Xaero's Minimap",
+          "score": 10.367,
+          "relevant": false,
+          "contributions": {
+            "i": 1.505,
+            "find": 1.195,
+            "not": 1.06,
+            "need": 1.002,
+            "keep": 0.989,
+            "quickly": 0.931,
+            "enough": 0.806,
+            "thing": 0.639,
+            "amount": 0.578,
+            "what": 0.575,
+            "way": 0.437,
+            "of": 0.241,
+            "and": 0.169,
+            "to": 0.103,
+            "a": 0.102,
+            "be": 0.034
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D08",
+          "title": "Sophisticated Storage",
+          "score": 9.643,
+          "relevant": true,
+          "contributions": {
+            "chest": 2.943,
+            "what": 1.06,
+            "thing": 0.838,
+            "keep": 0.757,
+            "amount": 0.757,
+            "not": 0.736,
+            "need": 0.66,
+            "i": 0.66,
+            "way": 0.573,
+            "of": 0.245,
+            "and": 0.175,
+            "to": 0.106,
+            "a": 0.101,
+            "be": 0.034
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D23",
+          "title": "Dungeons and Taverns",
+          "score": 9.031,
+          "relevant": false,
+          "contributions": {
+            "keep": 2.432,
+            "find": 2.022,
+            "thing": 1.434,
+            "amount": 1.296,
+            "need": 0.69,
+            "not": 0.523,
+            "of": 0.226,
+            "and": 0.169,
+            "to": 0.103,
+            "a": 0.102,
+            "be": 0.033
+          }
+        }
+      ]
+    },
+    "Q04": {
+      "type": "normal",
+      "query": "the game is slow on my old laptop, I want more frames per second and lower RAM consumption",
+      "relevant": [
+        "D10",
+        "D11",
+        "D12"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D10",
+          "title": "Sodium",
+          "score": 9.796,
+          "relevant": true,
+          "contributions": {
+            "frame": 3.081,
+            "old": 1.625,
+            "want": 1.126,
+            "game": 1.112,
+            "my": 0.945,
+            "i": 0.865,
+            "more": 0.381,
+            "on": 0.351,
+            "and": 0.174,
+            "the": 0.104,
+            "be": 0.033
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D29",
+          "title": "Xaero's World Map",
+          "score": 8.729,
+          "relevant": false,
+          "contributions": {
+            "old": 2.353,
+            "i": 1.54,
+            "my": 1.224,
+            "game": 1.044,
+            "want": 0.886,
+            "per": 0.627,
+            "on": 0.389,
+            "more": 0.355,
+            "and": 0.169,
+            "the": 0.107,
+            "be": 0.034
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D23",
+          "title": "Dungeons and Taverns",
+          "score": 8.519,
+          "relevant": false,
+          "contributions": {
+            "slow": 3.649,
+            "per": 2.453,
+            "want": 1.536,
+            "game": 0.575,
+            "and": 0.169,
+            "the": 0.104,
+            "be": 0.033
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D28",
+          "title": "Xaero's Minimap",
+          "score": 8.375,
+          "relevant": false,
+          "contributions": {
+            "old": 1.727,
+            "i": 1.505,
+            "my": 1.17,
+            "game": 0.942,
+            "frame": 0.806,
+            "per": 0.639,
+            "more": 0.497,
+            "want": 0.4,
+            "on": 0.376,
+            "and": 0.169,
+            "the": 0.107,
+            "be": 0.034
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D04",
+          "title": "Farmer's Delight",
+          "score": 7.681,
+          "relevant": false,
+          "contributions": {
+            "old": 2.472,
+            "my": 1.672,
+            "i": 1.451,
+            "game": 0.856,
+            "more": 0.579,
+            "on": 0.341,
+            "and": 0.176,
+            "the": 0.1,
+            "be": 0.034
+          }
+        }
+      ]
+    },
+    "Q05": {
+      "type": "normal",
+      "query": "make the game look nicer with better lighting and extra visual effects",
+      "relevant": [
+        "D13",
+        "D14",
+        "D15"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D28",
+          "title": "Xaero's Minimap",
+          "score": 7.814,
+          "relevant": false,
+          "contributions": {
+            "light": 1.727,
+            "effect": 1.569,
+            "look": 1.56,
+            "game": 0.942,
+            "make": 0.804,
+            "good": 0.631,
+            "with": 0.305,
+            "and": 0.169,
+            "the": 0.107
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D14",
+          "title": "LambDynamicLights - Dynamic Lights",
+          "score": 6.767,
+          "relevant": true,
+          "contributions": {
+            "light": 3.331,
+            "good": 1.288,
+            "game": 0.806,
+            "make": 0.785,
+            "with": 0.282,
+            "and": 0.173,
+            "the": 0.102
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D19",
+          "title": "Terralith",
+          "score": 6.745,
+          "relevant": false,
+          "contributions": {
+            "extra": 1.754,
+            "look": 1.664,
+            "light": 1.419,
+            "good": 0.69,
+            "game": 0.63,
+            "with": 0.306,
+            "and": 0.177,
+            "the": 0.106
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D04",
+          "title": "Farmer's Delight",
+          "score": 6.644,
+          "relevant": false,
+          "contributions": {
+            "nice": 3.741,
+            "good": 0.939,
+            "game": 0.856,
+            "make": 0.638,
+            "with": 0.194,
+            "and": 0.176,
+            "the": 0.1
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D29",
+          "title": "Xaero's World Map",
+          "score": 6.378,
+          "relevant": false,
+          "contributions": {
+            "effect": 1.551,
+            "look": 1.059,
+            "game": 1.044,
+            "good": 0.83,
+            "make": 0.754,
+            "light": 0.567,
+            "with": 0.297,
+            "and": 0.169,
+            "the": 0.107
+          }
+        }
+      ]
+    },
+    "Q06": {
+      "type": "normal",
+      "query": "play as a sorcerer and cast powerful spells",
+      "relevant": [
+        "D16",
+        "D17",
+        "D18"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D17",
+          "title": "Wizards (RPG Series)",
+          "score": 10.756,
+          "relevant": true,
+          "contributions": {
+            "spell": 4.642,
+            "cast": 3.002,
+            "powerful": 2.416,
+            "as": 0.428,
+            "and": 0.171,
+            "a": 0.097
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D16",
+          "title": "Iron's Spells 'n Spellbooks",
+          "score": 7.326,
+          "relevant": true,
+          "contributions": {
+            "spell": 4.447,
+            "powerful": 2.212,
+            "as": 0.392,
+            "and": 0.173,
+            "a": 0.102
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D18",
+          "title": "Goety - The Dark Arts",
+          "score": 6.31,
+          "relevant": true,
+          "contributions": {
+            "spell": 3.464,
+            "cast": 2.569,
+            "and": 0.176,
+            "a": 0.102
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D27",
+          "title": "Simply Swords",
+          "score": 5.196,
+          "relevant": false,
+          "contributions": {
+            "play": 2.722,
+            "powerful": 2.203,
+            "and": 0.175,
+            "a": 0.096
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D25",
+          "title": "L_Ender's Cataclysm",
+          "score": 3.723,
+          "relevant": false,
+          "contributions": {
+            "powerful": 3.03,
+            "as": 0.434,
+            "and": 0.163,
+            "a": 0.096
+          }
+        }
+      ]
+    },
+    "Q07": {
+      "type": "normal",
+      "query": "a more diverse landscape with new kinds of terrain, huge mountains and unusual forests",
+      "relevant": [
+        "D19",
+        "D20",
+        "D21"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D21",
+          "title": "Tectonic",
+          "score": 12.488,
+          "relevant": true,
+          "contributions": {
+            "mountain": 3.989,
+            "terrain": 3.816,
+            "forest": 2.75,
+            "more": 0.642,
+            "new": 0.468,
+            "with": 0.306,
+            "of": 0.243,
+            "and": 0.175,
+            "a": 0.1
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D19",
+          "title": "Terralith",
+          "score": 12.042,
+          "relevant": true,
+          "contributions": {
+            "terrain": 3.133,
+            "landscape": 2.752,
+            "huge": 2.288,
+            "mountain": 1.982,
+            "new": 0.586,
+            "more": 0.471,
+            "with": 0.306,
+            "of": 0.248,
+            "and": 0.177,
+            "a": 0.102
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D26",
+          "title": "Mowzie's Mobs",
+          "score": 5.963,
+          "relevant": false,
+          "contributions": {
+            "huge": 1.537,
+            "forest": 1.537,
+            "mountain": 1.332,
+            "new": 0.532,
+            "with": 0.279,
+            "of": 0.244,
+            "more": 0.223,
+            "and": 0.174,
+            "a": 0.103
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D11",
+          "title": "Lithium",
+          "score": 5.475,
+          "relevant": false,
+          "contributions": {
+            "unusual": 3.744,
+            "more": 0.579,
+            "new": 0.396,
+            "with": 0.248,
+            "of": 0.24,
+            "and": 0.173,
+            "a": 0.094
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D18",
+          "title": "Goety - The Dark Arts",
+          "score": 4.932,
+          "relevant": false,
+          "contributions": {
+            "kind": 3.041,
+            "more": 0.625,
+            "new": 0.447,
+            "with": 0.296,
+            "of": 0.246,
+            "and": 0.176,
+            "a": 0.102
+          }
+        }
+      ]
+    },
+    "Q08": {
+      "type": "normal",
+      "query": "discover interesting places while travelling, like abandoned underground ruins and new settlements",
+      "relevant": [
+        "D22",
+        "D23",
+        "D24",
+        "D25"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D23",
+          "title": "Dungeons and Taverns",
+          "score": 11.268,
+          "relevant": true,
+          "contributions": {
+            "ruin": 4.715,
+            "while": 1.974,
+            "place": 1.425,
+            "discover": 1.296,
+            "like": 1.234,
+            "new": 0.455,
+            "and": 0.169
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D19",
+          "title": "Terralith",
+          "score": 8.889,
+          "relevant": false,
+          "contributions": {
+            "underground": 2.805,
+            "abandon": 2.288,
+            "discover": 1.419,
+            "while": 0.984,
+            "like": 0.63,
+            "new": 0.586,
+            "and": 0.177
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D26",
+          "title": "Mowzie's Mobs",
+          "score": 7.826,
+          "relevant": false,
+          "contributions": {
+            "underground": 2.085,
+            "abandon": 1.537,
+            "place": 1.393,
+            "like": 1.151,
+            "discover": 0.954,
+            "new": 0.532,
+            "and": 0.174
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D21",
+          "title": "Tectonic",
+          "score": 6.41,
+          "relevant": false,
+          "contributions": {
+            "underground": 3.828,
+            "while": 1.182,
+            "like": 0.757,
+            "new": 0.468,
+            "and": 0.175
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D10",
+          "title": "Sodium",
+          "score": 4.621,
+          "relevant": false,
+          "contributions": {
+            "while": 1.529,
+            "place": 1.23,
+            "like": 1.112,
+            "new": 0.576,
+            "and": 0.174
+          }
+        }
+      ]
+    },
+    "Q09": {
+      "type": "normal",
+      "query": "fight strong bosses and get new kinds of weapons",
+      "relevant": [
+        "D25",
+        "D26",
+        "D27"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D16",
+          "title": "Iron's Spells 'n Spellbooks",
+          "score": 10.081,
+          "relevant": false,
+          "contributions": {
+            "fight": 3.089,
+            "boss": 3.089,
+            "weapon": 2.449,
+            "get": 1.076,
+            "of": 0.206,
+            "and": 0.173
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D25",
+          "title": "L_Ender's Cataclysm",
+          "score": 8.151,
+          "relevant": true,
+          "contributions": {
+            "fight": 3.994,
+            "boss": 3.994,
+            "and": 0.163
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D26",
+          "title": "Mowzie's Mobs",
+          "score": 7.897,
+          "relevant": true,
+          "contributions": {
+            "boss": 3.156,
+            "strong": 2.895,
+            "get": 0.895,
+            "new": 0.532,
+            "of": 0.244,
+            "and": 0.174
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D17",
+          "title": "Wizards (RPG Series)",
+          "score": 7.248,
+          "relevant": false,
+          "contributions": {
+            "weapon": 2.674,
+            "kind": 2.601,
+            "get": 1.175,
+            "new": 0.382,
+            "of": 0.245,
+            "and": 0.171
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D18",
+          "title": "Goety - The Dark Arts",
+          "score": 6.91,
+          "relevant": false,
+          "contributions": {
+            "kind": 3.041,
+            "fight": 2.225,
+            "get": 0.775,
+            "new": 0.447,
+            "of": 0.246,
+            "and": 0.176
+          }
+        }
+      ]
+    },
+    "Q10": {
+      "type": "normal",
+      "query": "I always get lost in the world and cannot find the way back to my house",
+      "relevant": [
+        "D28",
+        "D29",
+        "D30"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D24",
+          "title": "Towns and Towers",
+          "score": 11.368,
+          "relevant": false,
+          "contributions": {
+            "always": 1.912,
+            "cannot": 1.713,
+            "i": 1.52,
+            "find": 1.355,
+            "way": 1.172,
+            "get": 1.038,
+            "world": 1.011,
+            "my": 0.9,
+            "in": 0.366,
+            "and": 0.177,
+            "the": 0.103,
+            "to": 0.101
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D29",
+          "title": "Xaero's World Map",
+          "score": 10.625,
+          "relevant": true,
+          "contributions": {
+            "back": 1.89,
+            "i": 1.54,
+            "my": 1.224,
+            "always": 1.202,
+            "world": 1.183,
+            "find": 0.963,
+            "lose": 0.791,
+            "get": 0.622,
+            "way": 0.429,
+            "in": 0.401,
+            "and": 0.169,
+            "the": 0.107,
+            "to": 0.104
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D19",
+          "title": "Terralith",
+          "score": 9.689,
+          "relevant": false,
+          "contributions": {
+            "house": 2.752,
+            "lose": 1.982,
+            "cannot": 1.571,
+            "find": 1.48,
+            "world": 1.149,
+            "in": 0.371,
+            "and": 0.177,
+            "the": 0.106,
+            "to": 0.101
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D26",
+          "title": "Mowzie's Mobs",
+          "score": 9.399,
+          "relevant": false,
+          "contributions": {
+            "i": 1.618,
+            "my": 1.394,
+            "way": 1.393,
+            "lose": 1.332,
+            "find": 1.322,
+            "get": 0.895,
+            "world": 0.674,
+            "in": 0.388,
+            "and": 0.174,
+            "the": 0.106,
+            "to": 0.104
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D28",
+          "title": "Xaero's Minimap",
+          "score": 8.804,
+          "relevant": true,
+          "contributions": {
+            "i": 1.505,
+            "find": 1.195,
+            "my": 1.17,
+            "world": 1.162,
+            "back": 1.095,
+            "get": 0.747,
+            "always": 0.713,
+            "way": 0.437,
+            "in": 0.399,
+            "and": 0.169,
+            "the": 0.107,
+            "to": 0.103
+          }
+        }
+      ]
+    },
+    "T01": {
+      "type": "trap",
+      "query": "a mod that adds airplanes to fly over the world",
+      "relevant": [],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D23",
+          "title": "Dungeons and Taverns",
+          "score": 5.01,
+          "relevant": false,
+          "contributions": {
+            "fly": 2.088,
+            "over": 1.073,
+            "add": 0.587,
+            "world": 0.474,
+            "that": 0.437,
+            "the": 0.104,
+            "to": 0.103,
+            "a": 0.102,
+            "mod": 0.041
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D14",
+          "title": "LambDynamicLights - Dynamic Lights",
+          "score": 4.701,
+          "relevant": false,
+          "contributions": {
+            "fly": 2.927,
+            "add": 0.701,
+            "world": 0.665,
+            "a": 0.104,
+            "mod": 0.103,
+            "the": 0.102,
+            "to": 0.1
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D29",
+          "title": "Xaero's World Map",
+          "score": 3.98,
+          "relevant": false,
+          "contributions": {
+            "over": 1.414,
+            "world": 1.183,
+            "add": 0.528,
+            "that": 0.445,
+            "the": 0.107,
+            "to": 0.104,
+            "a": 0.101,
+            "mod": 0.097
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D24",
+          "title": "Towns and Towers",
+          "score": 3.962,
+          "relevant": false,
+          "contributions": {
+            "over": 1.282,
+            "world": 1.011,
+            "add": 0.789,
+            "that": 0.473,
+            "the": 0.103,
+            "a": 0.102,
+            "to": 0.101,
+            "mod": 0.1
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D19",
+          "title": "Terralith",
+          "score": 3.753,
+          "relevant": false,
+          "contributions": {
+            "over": 1.176,
+            "world": 1.149,
+            "add": 0.813,
+            "that": 0.214,
+            "the": 0.106,
+            "a": 0.102,
+            "to": 0.101,
+            "mod": 0.093
+          }
+        }
+      ]
+    },
+    "T02": {
+      "type": "trap",
+      "query": "drive cars on roads",
+      "relevant": [],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D12",
+          "title": "FerriteCore",
+          "score": 0.398,
+          "relevant": false,
+          "contributions": {
+            "on": 0.398
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D29",
+          "title": "Xaero's World Map",
+          "score": 0.389,
+          "relevant": false,
+          "contributions": {
+            "on": 0.389
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D19",
+          "title": "Terralith",
+          "score": 0.387,
+          "relevant": false,
+          "contributions": {
+            "on": 0.387
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D14",
+          "title": "LambDynamicLights - Dynamic Lights",
+          "score": 0.381,
+          "relevant": false,
+          "contributions": {
+            "on": 0.381
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D18",
+          "title": "Goety - The Dark Arts",
+          "score": 0.381,
+          "relevant": false,
+          "contributions": {
+            "on": 0.381
+          }
+        }
+      ]
+    },
+    "T03": {
+      "type": "trap",
+      "query": "catch pokemon and battle with them",
+      "relevant": [],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D25",
+          "title": "L_Ender's Cataclysm",
+          "score": 5.561,
+          "relevant": false,
+          "contributions": {
+            "battle": 4.749,
+            "they": 0.649,
+            "and": 0.163
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D26",
+          "title": "Mowzie's Mobs",
+          "score": 3.142,
+          "relevant": false,
+          "contributions": {
+            "catch": 1.849,
+            "they": 0.839,
+            "with": 0.279,
+            "and": 0.174
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D02",
+          "title": "Smarter Farmers (farmers replant)",
+          "score": 1.265,
+          "relevant": false,
+          "contributions": {
+            "they": 0.837,
+            "with": 0.256,
+            "and": 0.173
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D21",
+          "title": "Tectonic",
+          "score": 1.259,
+          "relevant": false,
+          "contributions": {
+            "they": 0.778,
+            "with": 0.306,
+            "and": 0.175
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D24",
+          "title": "Towns and Towers",
+          "score": 1.185,
+          "relevant": false,
+          "contributions": {
+            "they": 0.731,
+            "with": 0.277,
+            "and": 0.177
+          }
+        }
+      ]
+    },
+    "T04": {
+      "type": "trap",
+      "query": "talk to friends with a microphone on a multiplayer server",
+      "relevant": [],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D30",
+          "title": "Waystones",
+          "score": 7.401,
+          "relevant": false,
+          "contributions": {
+            "friend": 3.101,
+            "multiplayer": 2.459,
+            "server": 1.08,
+            "on": 0.337,
+            "with": 0.223,
+            "to": 0.102,
+            "a": 0.098
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D27",
+          "title": "Simply Swords",
+          "score": 5.165,
+          "relevant": false,
+          "contributions": {
+            "friend": 3.076,
+            "server": 1.306,
+            "with": 0.319,
+            "on": 0.275,
+            "a": 0.096,
+            "to": 0.092
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D29",
+          "title": "Xaero's World Map",
+          "score": 4.881,
+          "relevant": false,
+          "contributions": {
+            "multiplayer": 2.434,
+            "server": 1.556,
+            "on": 0.389,
+            "with": 0.297,
+            "to": 0.104,
+            "a": 0.101
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D11",
+          "title": "Lithium",
+          "score": 4.423,
+          "relevant": false,
+          "contributions": {
+            "multiplayer": 2.138,
+            "server": 1.479,
+            "on": 0.36,
+            "with": 0.248,
+            "to": 0.103,
+            "a": 0.094
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D28",
+          "title": "Xaero's Minimap",
+          "score": 3.81,
+          "relevant": false,
+          "contributions": {
+            "server": 1.488,
+            "multiplayer": 1.435,
+            "on": 0.376,
+            "with": 0.305,
+            "to": 0.103,
+            "a": 0.102
+          }
+        }
+      ]
+    },
+    "T05": {
+      "type": "trap",
+      "query": "firearms such as rifles and pistols",
+      "relevant": [],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "D19",
+          "title": "Terralith",
+          "score": 1.851,
+          "relevant": false,
+          "contributions": {
+            "such": 1.134,
+            "as": 0.54,
+            "and": 0.177
+          }
+        },
+        {
+          "rank": 2,
+          "doc": "D03",
+          "title": "[Let's Do] Farm & Charm",
+          "score": 1.746,
+          "relevant": false,
+          "contributions": {
+            "such": 1.018,
+            "as": 0.551,
+            "and": 0.177
+          }
+        },
+        {
+          "rank": 3,
+          "doc": "D10",
+          "title": "Sodium",
+          "score": 1.691,
+          "relevant": false,
+          "contributions": {
+            "such": 1.073,
+            "as": 0.444,
+            "and": 0.174
+          }
+        },
+        {
+          "rank": 4,
+          "doc": "D16",
+          "title": "Iron's Spells 'n Spellbooks",
+          "score": 1.641,
+          "relevant": false,
+          "contributions": {
+            "such": 1.076,
+            "as": 0.392,
+            "and": 0.173
+          }
+        },
+        {
+          "rank": 5,
+          "doc": "D15",
+          "title": "Visuality",
+          "score": 1.641,
+          "relevant": false,
+          "contributions": {
+            "such": 1.202,
+            "as": 0.438
+          }
+        }
+      ]
+    }
+  }
+}

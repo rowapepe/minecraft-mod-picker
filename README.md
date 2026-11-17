@@ -60,6 +60,19 @@ npm run dev              # http://localhost:5173
 
 Бэкенда пока нет, поэтому `npm run dev` поднимает заглушку API только для разработки. Для локального входа: пользователь `player` / `player`, администратор `admin` / `admin` (впишите в `.env`). Подробности: [docs/Tech/02-running.md](docs/Tech/02-running.md).
 
+### Поиск и benchmark
+
+Нужен Python 3.12+. Команды выполняются из каталога `code/`:
+
+```bash
+python -m pip install -r search/requirements.txt
+python -m search --explain "automate farm without lag"   # поиск по корпусу из 1000 модов
+python -m benchmark.run                                  # Recall@5, MRR@5 → benchmark/results/
+python -m pytest tests
+```
+
+Корпус выгружается заново командой `python3 code/scripts/fetch_modrinth.py` из корня (нужен `MODRINTH_USER_AGENT` в `.env`). Подробности: [docs/Tech/03-data.md](docs/Tech/03-data.md), [docs/Tech/05-verification.md](docs/Tech/05-verification.md).
+
 ## Документация
 
 Карта документов: [docs/README.md](docs/README.md). Продуктовая часть: [docs/Product/README.md](docs/Product/README.md).
@@ -70,4 +83,4 @@ npm run dev              # http://localhost:5173
 
 ## Текущее состояние
 
-Подготовка к контрольной точке 1: документация Product и интерфейс из трёх экранов в `code/frontend`. Рабочего RAG пока нет.
+Контрольная точка 1 пройдена: документация Product и интерфейс из трёх экранов в `code/frontend`. Для КТ2 готовы корпус из 1000 модов, собственный BM25 и benchmark поиска; бэкенд и ответ LLM ещё не подключены.
