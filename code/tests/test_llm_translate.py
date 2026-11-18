@@ -69,8 +69,7 @@ def test_russian_query_is_translated_before_search(settings, engine):  # noqa: F
     login(client)
     body = client.post("/api/search", json={"query": "сбор урожая правой кнопкой"}).json()
     assert body["mods"][0]["slug"] == "rightclickharvest"
-    assert body["answer"] is None
-    assert len(llm.calls) == 1
+    assert llm.calls[0] == (SYSTEM_PROMPT, "сбор урожая правой кнопкой")  # сначала перевод, потом объяснение
 
 
 def test_translation_failure_is_500_and_counted(settings, engine):  # noqa: F811

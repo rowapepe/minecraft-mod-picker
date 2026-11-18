@@ -2,13 +2,14 @@
 
 `/api/search` ищет по корпусу собственным BM25 (`code/search`, `D-17`).
 Запрос с кириллицей до поиска переводится через GigaChat (`D-18`);
-объяснение LLM пока не формируется: `answer` всегда `null`.
+по найденным модам GigaChat пишет объяснение или отказ (`D-19`).
 
 Запуск из `code/`:  uvicorn backend.main:app --reload --port 8000
 """
 
 from __future__ import annotations
 
+import logging
 from typing import Any, Protocol
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
@@ -18,9 +19,12 @@ from pydantic import BaseModel
 
 from .auth import COOKIE_NAME, Role, check_credentials, make_session, read_session
 from .config import Settings
-from .llm import LLM, make_llm
+from .explain import explain
+from .llm import LLM, LLMError, make_llm
 from .stats import Stats
 from .translate import translate_query
+
+logger = logging.getLogger(__name__)
 
 MAX_QUERY_LENGTH = 500  # RULE-UI-02
 TOP_K = 5  # RULE-SRCH-04
@@ -143,12 +147,18 @@ def create_app(
             raise HTTPException(400, "Пустой или слишком длинный запрос")
         try:
             query_en = translate_query(llm, query)  # GAP-01, RULE-SRCH-02
-            mods = [to_mod(doc) for doc, _ in engine.search(query_en, k=TOP_K)]
+            docs = [doc for doc, _ in engine.search(query_en, k=TOP_K)]
+            mods = [to_mod(doc) for doc in docs]
         except Exception:  # ошибка перевода — тоже ошибка поиска (RULE-ERR-01)
             stats.record_search(empty=False)  # запрос засчитывается и при ошибке (RULE-ADM-02)
             raise
         stats.record_search(empty=not mods)  # RULE-ADM-02, RULE-ADM-06
-        return SearchResponse(mods=mods, answer=None)  # LLM ещё не подключена (D-17)
+        try:
+            answer = explain(llm, query, docs)  # исходный запрос игрока (RULE-ANS-01)
+        except LLMError as error:
+            logger.warning("Объяснение недоступно: %s", error)
+            answer = None  # моды показываются без объяснения (RULE-ANS-04, GWT-09)
+        return SearchResponse(mods=mods, answer=answer)
 
     @app.get("/api/admin/stats")
     def admin_stats(_: Role = Depends(require("admin"))) -> dict:
