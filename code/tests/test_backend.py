@@ -1,6 +1,7 @@
-"""Каркас API: контракт `docs/Tech/04-api-and-access.md` без поиска и LLM."""
+"""API: контракт `docs/Tech/04-api-and-access.md`; поиск BM25 без LLM (`D-17`)."""
 
 from datetime import date
+from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
@@ -8,6 +9,15 @@ from fastapi.testclient import TestClient
 from backend.config import Settings, read_env_file
 from backend.main import create_app
 from backend.stats import Stats
+from search import ModSearch
+
+BENCH_CORPUS = Path(__file__).resolve().parents[1] / "benchmark" / "corpus.jsonl"
+
+
+@pytest.fixture(scope="module")
+def engine():
+    # 30 документов benchmark: быстро и с известным составом
+    return ModSearch.build(BENCH_CORPUS)
 
 
 @pytest.fixture
@@ -23,8 +33,8 @@ def settings(tmp_path):
 
 
 @pytest.fixture
-def client(settings):
-    return TestClient(create_app(settings))
+def client(settings, engine):
+    return TestClient(create_app(settings, engine))
 
 
 def login(client, who="player", password="player-pass"):
@@ -61,14 +71,42 @@ def test_logout_clears_session(client):
     assert client.get("/api/auth/me").status_code == 401
 
 
-def test_search_echo_reaches_backend(client):
+def test_search_returns_bm25_mods(client, engine):
     login(client)
-    r = client.post("/api/search", json={"query": "  ферма без лагов "})
+    r = client.post("/api/search", json={"query": "  harvest crops with right click "})
     assert r.status_code == 200
     body = r.json()
-    assert "ферма без лагов" in body["answer"]
-    assert len(body["mods"]) == 1
-    assert set(body["mods"][0]) == {"slug", "title", "description", "categories", "url"}
+    assert body["answer"] is None  # LLM ещё не подключена (D-17)
+    assert 1 <= len(body["mods"]) <= 5  # RULE-SRCH-04
+    expected = [doc["slug"] for doc, _ in engine.search("harvest crops with right click", k=5)]
+    assert [m["slug"] for m in body["mods"]] == expected  # порядок BM25 (RULE-SRCH-03)
+    assert body["mods"][0]["slug"] == "rightclickharvest"
+    first = body["mods"][0]
+    assert set(first) == {"slug", "title", "description", "categories", "url"}
+    assert first["url"].startswith("https://modrinth.com/mod/")
+
+
+def test_search_without_matches_is_empty_and_counted(client):
+    login(client)
+    r = client.post("/api/search", json={"query": "ферма без лагов"})  # без перевода (GAP-01)
+    assert r.json() == {"mods": [], "answer": None}
+    login(client, "admin", "admin-pass")
+    s = client.get("/api/admin/stats").json()
+    assert s["requests"] == 1 and s["noResults"] == 1
+
+
+def test_search_failure_is_500_and_counted(settings):
+    class Broken:
+        def search(self, query, k=5):
+            raise RuntimeError("index is broken")
+
+    client = TestClient(create_app(settings, Broken()), raise_server_exceptions=False)
+    login(client)
+    r = client.post("/api/search", json={"query": "farm"})
+    assert r.status_code == 500 and "index" not in r.text  # RULE-ERR-01
+    login(client, "admin", "admin-pass")
+    s = client.get("/api/admin/stats").json()
+    assert s["requests"] == 1 and s["noResults"] == 0
 
 
 @pytest.mark.parametrize("query", ["", "   ", "x" * 501])
@@ -92,7 +130,7 @@ def test_roles_are_checked_on_server(client):
 
 def test_stats_count_logins_and_valid_searches(client):
     login(client)
-    client.post("/api/search", json={"query": "магия"})
+    client.post("/api/search", json={"query": "magic spells"})
     client.post("/api/search", json={"query": "   "})  # не считается (RULE-ADM-02)
     login(client, "admin", "admin-pass")
     s = client.get("/api/admin/stats").json()

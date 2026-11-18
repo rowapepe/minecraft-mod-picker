@@ -1,12 +1,14 @@
 """Каркас API Minecraft Mod Picker. Контракт: `docs/Tech/04-api-and-access.md`.
 
-Этап каркаса: `/api/search` не вызывает индекс и LLM, а отвечает проверочным
-сообщением о том, что запрос дошёл до сервера (`D-16`).
+`/api/search` ищет по корпусу собственным BM25 (`code/search`, `D-17`).
+LLM пока не подключена: `answer` всегда `null`.
 
 Запуск из `code/`:  uvicorn backend.main:app --reload --port 8000
 """
 
 from __future__ import annotations
+
+from typing import Any, Protocol
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.exceptions import RequestValidationError
@@ -18,6 +20,13 @@ from .config import Settings
 from .stats import Stats
 
 MAX_QUERY_LENGTH = 500  # RULE-UI-02
+TOP_K = 5  # RULE-SRCH-04
+
+
+class SearchEngine(Protocol):
+    """То, что бэкенду нужно от модуля поиска (`D-17`): `search.ModSearch`."""
+
+    def search(self, query: str, k: int = ...) -> list[tuple[dict[str, Any], Any]]: ...
 
 
 class LoginBody(BaseModel):
@@ -42,29 +51,28 @@ class SearchResponse(BaseModel):
     answer: str | None
 
 
-def echo_search(query: str) -> SearchResponse:
-    """Проверочный ответ каркаса вместо поиска BM25 и LLM.
+def open_search() -> SearchEngine:
+    """Индекс BM25 по корпусу `code/data/mods.jsonl` (загружается или строится)."""
+    from search import ModSearch  # пакет code/search; каталог code/ в sys.path
 
-    Карточка нужна, чтобы интерфейс показал ответ: при пустом `mods` он
-    выводит «ничего не найдено» и не показывает `answer`.
-    """
-    return SearchResponse(
-        answer=f"Бэкенд получил запрос «{query}». Поиск и LLM пока не подключены: это проверочный ответ каркаса.",
-        mods=[
-            Mod(
-                slug="backend-check",
-                title="Бэкенд на связи",
-                description="Служебная карточка: запрос дошёл от интерфейса до сервера и вернулся обратно.",
-                categories=["Служебное"],
-                url="https://modrinth.com/mods",
-            )
-        ],
+    return ModSearch.open()
+
+
+def to_mod(doc: dict[str, Any]) -> Mod:
+    """Документ корпуса → `Mod` контракта; балл BM25 наружу не отдаётся."""
+    return Mod(
+        slug=doc["slug"],
+        title=doc["title"],
+        description=doc.get("description") or "",
+        categories=list(doc.get("categories") or []),
+        url=doc.get("url") or f"https://modrinth.com/mod/{doc['slug']}",  # RULE-UI-04
     )
 
 
-def create_app(settings: Settings | None = None) -> FastAPI:
+def create_app(settings: Settings | None = None, engine: SearchEngine | None = None) -> FastAPI:
     settings = settings or Settings.load()
     stats = Stats(settings.db_path)
+    engine = engine or open_search()  # один раз при старте, а не на каждый запрос
     app = FastAPI(title="Minecraft Mod Picker API", docs_url="/api/docs", openapi_url="/api/openapi.json")
     app.state.settings = settings
     app.state.stats = stats
@@ -120,9 +128,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         query = body.query.strip()
         if not query or len(body.query) > MAX_QUERY_LENGTH:  # RULE-UI-01, RULE-UI-02
             raise HTTPException(400, "Пустой или слишком длинный запрос")
-        result = echo_search(query)
-        stats.record_search(empty=not result.mods)  # RULE-ADM-02, RULE-ADM-06
-        return result
+        try:
+            mods = [to_mod(doc) for doc, _ in engine.search(query, k=TOP_K)]
+        except Exception:
+            stats.record_search(empty=False)  # запрос засчитывается и при ошибке (RULE-ADM-02)
+            raise
+        stats.record_search(empty=not mods)  # RULE-ADM-02, RULE-ADM-06
+        return SearchResponse(mods=mods, answer=None)  # LLM ещё не подключена (D-17)
 
     @app.get("/api/admin/stats")
     def admin_stats(_: Role = Depends(require("admin"))) -> dict:

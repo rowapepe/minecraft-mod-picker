@@ -12,6 +12,6 @@
 | `code/frontend/src/library/`    | Чистые функции: проверка запроса, форматирование, тема         |
 | `code/frontend/src/styles/`     | Цвета и размеры (`tokens.css`), стили приложения               |
 | `code/frontend/dev-stub/`       | Заглушка API для разработки (GAP-13), в сборку не входит       |
-| `code/backend/`                 | API на FastAPI: вход, проверочный поиск, счётчики (`D-16`)     |
+| `code/backend/`                 | API на FastAPI: вход, поиск BM25, счётчики (`D-17`)            |
 | `code/tests/`                   | Тесты pytest для скриптов, поиска и бэкенда                    |
 | `code/benchmark/`               | Корпус из 30 документов, вопросы, `python -m benchmark.run`    |
