@@ -6,3 +6,5 @@ httpx>=0.27
 pytest>=8
 # модуль поиска code/search (лемматизация)
 simplemma==2.0.0
+# LLM (D-18)
+gigachat>=0.2,<0.3

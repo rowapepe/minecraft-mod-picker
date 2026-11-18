@@ -1,7 +1,8 @@
 """Каркас API Minecraft Mod Picker. Контракт: `docs/Tech/04-api-and-access.md`.
 
 `/api/search` ищет по корпусу собственным BM25 (`code/search`, `D-17`).
-LLM пока не подключена: `answer` всегда `null`.
+Запрос с кириллицей до поиска переводится через GigaChat (`D-18`);
+объяснение LLM пока не формируется: `answer` всегда `null`.
 
 Запуск из `code/`:  uvicorn backend.main:app --reload --port 8000
 """
@@ -17,7 +18,9 @@ from pydantic import BaseModel
 
 from .auth import COOKIE_NAME, Role, check_credentials, make_session, read_session
 from .config import Settings
+from .llm import LLM, make_llm
 from .stats import Stats
+from .translate import translate_query
 
 MAX_QUERY_LENGTH = 500  # RULE-UI-02
 TOP_K = 5  # RULE-SRCH-04
@@ -69,10 +72,20 @@ def to_mod(doc: dict[str, Any]) -> Mod:
     )
 
 
-def create_app(settings: Settings | None = None, engine: SearchEngine | None = None) -> FastAPI:
+_FROM_SETTINGS: Any = object()
+
+
+def create_app(
+    settings: Settings | None = None,
+    engine: SearchEngine | None = None,
+    llm: LLM | None = _FROM_SETTINGS,
+) -> FastAPI:
+    """`llm=None` — без LLM; по умолчанию LLM создаётся по настройкам (`D-18`)."""
     settings = settings or Settings.load()
     stats = Stats(settings.db_path)
     engine = engine or open_search()  # один раз при старте, а не на каждый запрос
+    if llm is _FROM_SETTINGS:
+        llm = make_llm(settings)
     app = FastAPI(title="Minecraft Mod Picker API", docs_url="/api/docs", openapi_url="/api/openapi.json")
     app.state.settings = settings
     app.state.stats = stats
@@ -129,8 +142,9 @@ def create_app(settings: Settings | None = None, engine: SearchEngine | None = N
         if not query or len(body.query) > MAX_QUERY_LENGTH:  # RULE-UI-01, RULE-UI-02
             raise HTTPException(400, "Пустой или слишком длинный запрос")
         try:
-            mods = [to_mod(doc) for doc, _ in engine.search(query, k=TOP_K)]
-        except Exception:
+            query_en = translate_query(llm, query)  # GAP-01, RULE-SRCH-02
+            mods = [to_mod(doc) for doc, _ in engine.search(query_en, k=TOP_K)]
+        except Exception:  # ошибка перевода — тоже ошибка поиска (RULE-ERR-01)
             stats.record_search(empty=False)  # запрос засчитывается и при ошибке (RULE-ADM-02)
             raise
         stats.record_search(empty=not mods)  # RULE-ADM-02, RULE-ADM-06

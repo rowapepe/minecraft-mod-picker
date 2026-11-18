@@ -1,5 +1,25 @@
 # Протокол проверок
 
+## 2026-11-18. Обёртка GigaChat и перевод запроса
+
+**Что проверялось.** Перевод запроса (`D-18`): LLM вызывается только для запросов с кириллицей; очистка ответа модели; пустой перевод и ошибка LLM дают `500` без технических деталей и засчитываются; русский запрос после перевода находит нужный мод; обёртка GigaChat передаёт системное и пользовательское сообщения и приводит ошибки к `LLMError`; без ключа LLM не создаётся.
+
+**Как.** `code/tests/test_llm_translate.py` — 20 тестов на подставной LLM. Все тесты `code/tests`: 68 прошли. Вручную: бэкенд стартует без `LLM_API_KEY`. Без сертификатов Минцифры запрос к GigaChat падает на `CERTIFICATE_VERIFY_FAILED`; с `certs/russian_trusted_ca.pem` авторизация проходит. Адрес `api.giga.chat` (по умолчанию в `gigachat` 0.2.4) не отвечает: `ConnectTimeout` при TLS-рукопожатии и в `curl`; классический `gigachat.devices.sberbank.ru` работает — он сделан адресом по умолчанию.
+
+Перевод настоящей моделью `GigaChat` и поиск по полному корпусу (1000 модов):
+
+| Запрос | Перевод | Первые моды | Время |
+| ------ | ------- | ----------- | ----- |
+| хочу автоматизировать ферму и не получить лагов | automatic farm automation no lags performance optimization | Create: Central Kitchen, Enhanced Block Entities, ServerCore | 0,9 с |
+| хочу магию с заклинаниями | magic spells enchantments wizardry spellcasting | Iron's Spells 'n Spellbooks, Spell Power Attributes, Wizards | 0,2 с |
+| повысить fps на слабом ноутбуке | fps optimization performance settings laptop low specifications | Dynamic FPS, ImmediatelyFast, Enhanced Block Entities | 0,2 с |
+| новые биомы и пещеры | new biomes caves exploration terrain generation | Terralith, Tectonic, AdoraBuild: Structures | 0,2 с |
+| мод на мини-карту | mini map mod miniature map | Noxesium, InventoryHUD+, Xaero's World Map | 0,1 с |
+
+Перевод осмысленный; в последнем запросе модель дала `mini map` раздельно, и мод миникарты не попал на первое место — вопрос качества поиска, а не перевода.
+
+**Не проверено.** Экран поиска в браузере с переводом; качество перевода на вопросах benchmark.
+
 ## 2026-11-18. Поиск BM25 в бэкенде
 
 **Что проверялось.** `/api/search` с собственным BM25 (`D-17`): выдача совпадает с `ModSearch.search` и по составу, и по порядку; не больше пяти модов; поля `Mod`; `answer = null`; пустая выдача увеличивает `noResults`; ошибка поиска — `500` без технических деталей и засчитывается в `requests`.
