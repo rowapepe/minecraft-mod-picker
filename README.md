@@ -58,7 +58,19 @@ npm install
 npm run dev              # http://localhost:5173
 ```
 
-Бэкенда пока нет, поэтому `npm run dev` поднимает заглушку API только для разработки. Для локального входа: пользователь `player` / `player`, администратор `admin` / `admin` (впишите в `.env`). Подробности: [docs/Tech/02-running.md](docs/Tech/02-running.md).
+Без `API_TARGET` `npm run dev` поднимает заглушку API только для разработки; с `API_TARGET=http://localhost:8000` интерфейс работает с бэкендом (ниже). Для локального входа: пользователь `player` / `player`, администратор `admin` / `admin` (впишите в `.env`). Подробности: [docs/Tech/02-running.md](docs/Tech/02-running.md).
+
+### Бэкенд (каркас)
+
+Из каталога `code/`:
+
+```bash
+python3 -m venv backend/.venv
+backend/.venv/bin/pip install -r backend/requirements.txt
+backend/.venv/bin/uvicorn backend.main:app --reload --port 8000
+```
+
+Пока `/api/search` отвечает проверочным сообщением без поиска и LLM (`D-16`). Подробности: [docs/Tech/02-running.md](docs/Tech/02-running.md).
 
 ### Поиск и benchmark
 
@@ -83,4 +95,4 @@ python -m pytest tests
 
 ## Текущее состояние
 
-Контрольная точка 1 пройдена: документация Product и интерфейс из трёх экранов в `code/frontend`. Для КТ2 готовы корпус из 1000 модов, собственный BM25 и benchmark поиска; бэкенд и ответ LLM ещё не подключены.
+Контрольная точка 1 пройдена: документация Product и интерфейс из трёх экранов в `code/frontend`. Для КТ2 готовы корпус из 1000 модов, собственный BM25 и benchmark поиска; бэкенд работает как каркас API (вход, аналитика, проверочный ответ на поиск); поиск BM25 и LLM к нему ещё не подключены.

@@ -224,3 +224,6 @@ dist/
 
 # Индекс BM25 строится из корпуса: python -m search build (из code/)
 code/data/index.json
+
+# Локальная база счётчиков бэкенда
+code/backend/.data/

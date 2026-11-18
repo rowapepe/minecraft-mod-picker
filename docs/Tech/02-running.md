@@ -1,11 +1,11 @@
 # 02. Запуск и настройки
 
-Статус: интерфейс запускается, бэкенд — заготовка.
+Статус: интерфейс запускается; бэкенд — каркас API без поиска и LLM (`D-16`).
 
 ## Требования
 
 - Node.js 20 и новее, npm — для интерфейса (`code/frontend`).
-- Python 3.12 и новее, `uv` — для бэкенда (`code/backend`, пока пусто).
+- Python 3.12 и новее, `uv` (или `pip`) — для бэкенда (`code/backend`).
 
 ## Настройки
 
@@ -54,4 +54,22 @@ npm test                 # тесты Vitest
 
 ## Запуск приложения целиком
 
-TODO (Прощаев): команда запуска бэкенда, раздача собранного интерфейса, Docker Compose.
+### Бэкенд (каркас)
+
+Команды выполняются из `code/`. Бэкенд читает тот же `.env` в корне репозитория (`USER_*`, `ADMIN_*`, `SESSION_SECRET`). Если `SESSION_SECRET` пуст, берётся случайный ключ и сессии сбрасываются при перезапуске.
+
+```bash
+python3 -m venv backend/.venv
+backend/.venv/bin/pip install -r backend/requirements.txt
+backend/.venv/bin/uvicorn backend.main:app --reload --port 8000   # http://localhost:8000/api/health
+```
+
+С `uv`: `uv run --project backend uvicorn backend.main:app --reload --port 8000`.
+
+Чтобы интерфейс работал с бэкендом вместо заглушки, впишите в `.env` `API_TARGET=http://localhost:8000` и перезапустите `npm run dev`. Описание методов в браузере: `http://localhost:8000/api/docs`.
+
+Счётчики аналитики хранятся в SQLite `code/backend/.data/analytics.sqlite3` (каталог исключён из Git); путь меняется переменной `BACKEND_DB_PATH`. Удаление файла сбрасывает статистику.
+
+На этапе каркаса `/api/search` не вызывает поиск и LLM, а возвращает проверочный ответ (`D-16`).
+
+TODO (Прощаев): раздача собранного интерфейса бэкендом, Docker Compose.
