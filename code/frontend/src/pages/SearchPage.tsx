@@ -113,10 +113,15 @@ export function SearchPage() {
 		document.title = "Поиск модов"
 	}, [])
 
-	// Открытый чат показывается с последнего сообщения, новый ответ доскролливается.
+	// Лента показывает начало последнего сообщения; готовый ответ вниз не доскролливается (RULE-UI-15).
 	useEffect(() => {
-		feedRef.current?.scrollTo({ top: feedRef.current.scrollHeight })
-	}, [activeId, active?.messages.length, lastMessage?.status])
+		const feed = feedRef.current
+		if (!feed) return
+		const turns = feed.querySelectorAll<HTMLElement>(".turn")
+		const last = turns[turns.length - 1]
+		if (last) last.scrollIntoView({ block: "start" })
+		else feed.scrollTo({ top: 0 })
+	}, [activeId, active?.messages.length])
 
 	const closeIfNarrow = () => {
 		if (isNarrow()) setSbOpen(false)
@@ -311,7 +316,7 @@ function AnswerBody({ entry }: { entry: Message }) {
 			)}
 			<div className="mods">
 				<div className="sb-label">Найденные моды</div>
-				{entry.mods.map((m) => (
+				{entry.mods.slice(0, 4).map((m) => (
 					<ModCard key={m.slug} mod={m} />
 				))}
 			</div>

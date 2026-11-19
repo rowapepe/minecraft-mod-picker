@@ -1,5 +1,5 @@
 /**
- * Заглушка API для разработки интерфейса без бэкенда (GAP-13).
+ * Заглушка API для разработки интерфейса без бэкенда (D-26).
  * Подключается только в `npm run dev` без API_TARGET и в сборку не входит.
  * Повторяет контракт из docs/Tech/04-api-and-access.md.
  *
@@ -56,14 +56,16 @@ const SETS: Record<CostumeId, { answer: string; mods: StubMod[] }> = {
       { slug: 'jade', title: 'Jade', description: 'Показывает подсказку о блоке или существе под прицелом.', categories: ['Утилиты', 'Интерфейс'] },
       { slug: 'jei', title: 'Just Enough Items', description: 'Просмотр предметов и рецептов прямо в инвентаре.', categories: ['Утилиты', 'Рецепты'] },
       { slug: 'xaeros-minimap', title: "Xaero's Minimap", description: 'Миникарта с метками и отображением окрестностей.', categories: ['Карта', 'Интерфейс'] },
+      { slug: 'appleskin', title: 'AppleSkin', description: 'Показывает насыщение и восстановление от еды.', categories: ['Утилиты', 'Еда'] },
     ],
   },
   miner: {
-    answer: 'Для новой генерации мира и приключений под землёй подойдут эти три мода: они меняют ландшафт, пещеры и шахты.',
+    answer: 'Для новой генерации мира и приключений под землёй подойдут эти моды: они меняют ландшафт, пещеры и шахты.',
     mods: [
       { slug: 'terralith', title: 'Terralith', description: 'Новые биомы и обновлённая генерация ландшафта.', categories: ['Генерация мира', 'Биомы'] },
       { slug: 'yungs-better-mineshafts', title: "YUNG's Better Mineshafts", description: 'Переработанные заброшенные шахты с новыми комнатами.', categories: ['Генерация мира', 'Приключения'] },
       { slug: 'tectonic', title: 'Tectonic', description: 'Высокие горы и глубокие впадины в рельефе мира.', categories: ['Генерация мира', 'Ландшафт'] },
+      { slug: 'alexs-caves', title: "Alex's Caves", description: 'Новые пещерные биомы с существами и находками.', categories: ['Генерация мира', 'Приключения'] },
     ],
   },
   wizard: {
@@ -72,14 +74,16 @@ const SETS: Record<CostumeId, { answer: string; mods: StubMod[] }> = {
       { slug: 'ars-nouveau', title: 'Ars Nouveau', description: 'Магия на основе глифов, из которых собираются свои заклинания.', categories: ['Магия', 'Приключения'] },
       { slug: 'botania', title: 'Botania', description: 'Магия, которая использует цветы и ману.', categories: ['Магия', 'Технологии'] },
       { slug: 'irons-spells-n-spellbooks', title: "Iron's Spells 'n Spellbooks", description: 'Школы магии, книги заклинаний и новые боевые умения.', categories: ['Магия', 'Боевая система'] },
+      { slug: 'occultism', title: 'Occultism', description: 'Духи и ритуалы для добычи ресурсов и автоматизации.', categories: ['Магия', 'Технологии'] },
     ],
   },
   shades: {
-    answer: 'Для красивой картинки нужна связка: один мод ускоряет отрисовку, другой подключает шейдеры, третий расширяет дальность.',
+    answer: 'Для красивой картинки нужна связка: один мод ускоряет отрисовку, другой подключает шейдеры, остальные расширяют дальность и освещение.',
     mods: [
       { slug: 'iris', title: 'Iris Shaders', description: 'Загрузка шейдерпаков с совместимостью с Sodium.', categories: ['Графика', 'Шейдеры'] },
       { slug: 'sodium', title: 'Sodium', description: 'Современный движок отрисовки, который повышает FPS.', categories: ['Графика', 'Оптимизация'] },
       { slug: 'distant-horizons', title: 'Distant Horizons', description: 'Показывает далёкие участки мира с упрощённой детализацией.', categories: ['Графика', 'Генерация мира'] },
+      { slug: 'lambdynamiclights', title: 'LambDynamicLights', description: 'Динамическое освещение от предметов в руках и существ.', categories: ['Графика', 'Освещение'] },
     ],
   },
   knight: {
@@ -88,6 +92,7 @@ const SETS: Record<CostumeId, { answer: string; mods: StubMod[] }> = {
       { slug: 'better-combat', title: 'Better Combat', description: 'Новая система ближнего боя с анимациями ударов.', categories: ['Боевая система', 'Анимации'] },
       { slug: 'epic-fight', title: 'Epic Fight', description: 'Новые боевые приёмы, анимации и стиль сражений.', categories: ['Боевая система', 'Приключения'] },
       { slug: 'bosses-of-mass-destruction', title: 'Bosses of Mass Destruction', description: 'Крупные боссы для настоящих испытаний.', categories: ['Мобы', 'Приключения'] },
+      { slug: 'simply-swords', title: 'Simply Swords', description: 'Новые мечи с уникальными умениями.', categories: ['Боевая система', 'Оружие'] },
     ],
   },
   builder: {
@@ -96,6 +101,7 @@ const SETS: Record<CostumeId, { answer: string; mods: StubMod[] }> = {
       { slug: 'sophisticated-storage', title: 'Sophisticated Storage', description: 'Улучшаемые сундуки и бочки с удобным интерфейсом.', categories: ['Хранение', 'Утилиты'] },
       { slug: 'chipped', title: 'Chipped', description: 'Много вариантов декоративных блоков для оформления построек.', categories: ['Декор', 'Строительство'] },
       { slug: 'litematica', title: 'Litematica', description: 'Схемы построек, которые показываются прямо в мире.', categories: ['Строительство', 'Утилиты'] },
+      { slug: 'framedblocks', title: 'FramedBlocks', description: 'Каркасные блоки любой формы для точных построек.', categories: ['Строительство', 'Декор'] },
     ],
   },
   farmer: {
@@ -104,14 +110,16 @@ const SETS: Record<CostumeId, { answer: string; mods: StubMod[] }> = {
       { slug: 'farmers-delight', title: "Farmer's Delight", description: 'Новые культуры, кулинария и кухонная утварь.', categories: ['Еда', 'Фермерство'] },
       { slug: 'croptopia', title: 'Croptopia', description: 'Множество новых растений и блюд из них.', categories: ['Еда', 'Фермерство'] },
       { slug: 'create', title: 'Create', description: 'Механизмы и конвейеры для автоматизации работ.', categories: ['Технологии', 'Автоматизация'] },
+      { slug: 'botany-pots', title: 'Botany Pots', description: 'Горшки для выращивания культур в одном блоке.', categories: ['Фермерство', 'Утилиты'] },
     ],
   },
   racer: {
-    answer: 'Для слабого компьютера подойдут три мода, каждый из которых берёт на себя свою часть нагрузки.',
+    answer: 'Для слабого компьютера подойдут эти моды: каждый берёт на себя свою часть нагрузки.',
     mods: [
       { slug: 'sodium', title: 'Sodium', description: 'Современный движок отрисовки, который повышает FPS.', categories: ['Оптимизация', 'Графика'] },
       { slug: 'lithium', title: 'Lithium', description: 'Оптимизация игровой логики без изменения геймплея.', categories: ['Оптимизация', 'Сервер'] },
       { slug: 'ferritecore', title: 'FerriteCore', description: 'Снижает расход оперативной памяти.', categories: ['Оптимизация', 'Память'] },
+      { slug: 'entityculling', title: 'Entity Culling', description: 'Не отрисовывает невидимые сущности и блоки, повышая FPS.', categories: ['Оптимизация', 'Графика'] },
     ],
   },
 };

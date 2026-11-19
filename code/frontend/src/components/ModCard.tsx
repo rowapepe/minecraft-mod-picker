@@ -9,24 +9,24 @@ function tileColor(slug: string): string {
   return TILE_COLORS[h % TILE_COLORS.length];
 }
 
-/** Карточка мода (RULE-UI-04): название, описание, до пяти категорий, ссылка в новой вкладке. */
+/** Карточка мода (RULE-UI-04, RULE-UI-14): компактный вид для сетки два столбца. */
 export function ModCard({ mod }: { mod: Mod }) {
   const initial = mod.title.replace(/[^\p{L}\p{N}]/gu, '').charAt(0).toUpperCase();
   return (
     <article className="mod-card">
-      <div className="mod-tile" style={{ background: tileColor(mod.slug) }} aria-hidden="true">
-        {initial}
-      </div>
-      <div className="mod-body">
-        <h3 className="mod-title">{mod.title}</h3>
-        <p className="mod-desc">{mod.description}</p>
-        <div className="chips">
-          {mod.categories.slice(0, 5).map((c) => (
-            <span className="chip" key={c}>
-              {c}
-            </span>
-          ))}
+      <div className="mod-head">
+        <div className="mod-tile" style={{ background: tileColor(mod.slug) }} aria-hidden="true">
+          {initial}
         </div>
+        <h3 className="mod-title">{mod.title}</h3>
+      </div>
+      <p className="mod-desc">{mod.description}</p>
+      <div className="chips">
+        {mod.categories.slice(0, 5).map((c) => (
+          <span className="chip" key={c}>
+            {c}
+          </span>
+        ))}
       </div>
       <a className="open-link" href={mod.url} target="_blank" rel="noopener noreferrer">
         <span>Открыть на Modrinth</span>

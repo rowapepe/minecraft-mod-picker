@@ -1,5 +1,5 @@
 import type { Rect } from './costumes';
-import { MASCOT_NAME, SKELETON, THINKING_SAY, ZOMBIE_BODY, type Costume } from './costumes';
+import { SKELETON, ZOMBIE_BODY, type Costume } from './costumes';
 
 function Pixels({ rects, width, height, className }: { rects: Rect[]; width: number; height: number; className?: string }) {
   return (
@@ -23,14 +23,10 @@ export function Zombie({ costume, thinking = false, className = '' }: { costume:
   );
 }
 
-/** Зомби над формой запроса: имя, реплика в рамке и сам талисман (RULE-MASCOT-01…05). */
+/** Зомби над формой запроса поверх ленты, без имени и реплики (RULE-MASCOT-01…04, D-21). */
 export function MascotRow({ costume, thinking }: { costume: Costume; thinking: boolean }) {
   return (
     <div className="mascot-row">
-      <div className="bubble">
-        <span className="bubble-name">{MASCOT_NAME}</span>
-        <span className="bubble-say">{thinking ? THINKING_SAY : costume.say}</span>
-      </div>
       <Zombie costume={costume} thinking={thinking} />
     </div>
   );

@@ -4,7 +4,7 @@ import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import { apiStub } from './dev-stub/stub';
 
-// Без API_TARGET в режиме разработки работает заглушка API (GAP-13).
+// Без API_TARGET в режиме разработки работает заглушка API (D-26).
 // С API_TARGET запросы /api идут на настоящий бэкенд.
 // Единый .env лежит в корне репозитория.
 const rootDir = fileURLToPath(new URL('../..', import.meta.url));
