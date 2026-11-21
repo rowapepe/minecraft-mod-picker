@@ -63,6 +63,9 @@ class Settings:
     llm_ca_bundle: str = ""
     llm_timeout: float = 30.0
     llm_base_url: str = DEFAULT_LLM_BASE_URL
+    # Обменный датасет другой команды (ветка test_memes): путь к dataset.json;
+    # пусто — штатный корпус модов, перевод и промпт Minecraft
+    exchange_dataset: str = ""
 
     @classmethod
     def load(cls, env_path: Path = ENV_PATH) -> "Settings":
@@ -85,4 +88,5 @@ class Settings:
             llm_ca_bundle=resolve_path(env.get("LLM_CA_BUNDLE", "")) or default_ca_bundle(),
             llm_timeout=float(env.get("LLM_TIMEOUT") or 30),
             llm_base_url=env.get("LLM_BASE_URL") or DEFAULT_LLM_BASE_URL,
+            exchange_dataset=resolve_path(env.get("EXCHANGE_DATASET", "")),
         )

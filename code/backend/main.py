@@ -58,8 +58,12 @@ class SearchResponse(BaseModel):
     answer: str | None
 
 
-def open_search() -> SearchEngine:
-    """Индекс BM25 по корпусу `code/data/mods.jsonl` (загружается или строится)."""
+def open_search(settings: Settings) -> SearchEngine:
+    """Индекс BM25: обменный датасет (`EXCHANGE_DATASET`) или корпус `code/data/mods.jsonl`."""
+    if settings.exchange_dataset:
+        from .exchange import open_engine
+
+        return open_engine(settings.exchange_dataset)
     from search import ModSearch  # пакет code/search; каталог code/ в sys.path
 
     return ModSearch.open()
@@ -72,7 +76,7 @@ def to_mod(doc: dict[str, Any]) -> Mod:
         title=doc["title"],
         description=doc.get("description") or "",
         categories=list(doc.get("categories") or []),
-        url=doc.get("url") or f"https://modrinth.com/mod/{doc['slug']}",  # RULE-UI-04
+        url=doc["url"] if "url" in doc else f"https://modrinth.com/mod/{doc['slug']}",  # RULE-UI-04
     )
 
 
@@ -87,7 +91,7 @@ def create_app(
     """`llm=None` — без LLM; по умолчанию LLM создаётся по настройкам (`D-18`)."""
     settings = settings or Settings.load()
     stats = Stats(settings.db_path)
-    engine = engine or open_search()  # один раз при старте, а не на каждый запрос
+    engine = engine or open_search(settings)  # один раз при старте, а не на каждый запрос
     if llm is _FROM_SETTINGS:
         llm = make_llm(settings)
     app = FastAPI(title="Minecraft Mod Picker API", docs_url="/api/docs", openapi_url="/api/openapi.json")
@@ -146,7 +150,8 @@ def create_app(
         if not query or len(body.query) > MAX_QUERY_LENGTH:  # RULE-UI-01, RULE-UI-02
             raise HTTPException(400, "Пустой или слишком длинный запрос")
         try:
-            query_en = translate_query(llm, query)  # GAP-01, RULE-SRCH-02
+            # обменный корпус русский: перевод не нужен (ветка test_memes)
+            query_en = query if settings.exchange_dataset else translate_query(llm, query)  # GAP-01, RULE-SRCH-02
             docs = [doc for doc, _ in engine.search(query_en, k=TOP_K)]
             mods = [to_mod(doc) for doc in docs]
         except Exception:  # ошибка перевода — тоже ошибка поиска (RULE-ERR-01)
@@ -154,7 +159,12 @@ def create_app(
             raise
         stats.record_search(empty=not mods)  # RULE-ADM-02, RULE-ADM-06
         try:
-            answer = explain(llm, query, docs)  # исходный запрос игрока (RULE-ANS-01)
+            if settings.exchange_dataset:
+                from .exchange import explain_exchange
+
+                answer = explain_exchange(llm, query, docs)
+            else:
+                answer = explain(llm, query, docs)  # исходный запрос игрока (RULE-ANS-01)
         except LLMError as error:
             logger.warning("Объяснение недоступно: %s", error)
             answer = None  # моды показываются без объяснения (RULE-ANS-04, GWT-09)

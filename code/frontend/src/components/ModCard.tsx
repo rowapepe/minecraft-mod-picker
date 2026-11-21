@@ -28,10 +28,12 @@ export function ModCard({ mod }: { mod: Mod }) {
           </span>
         ))}
       </div>
-      <a className="open-link" href={mod.url} target="_blank" rel="noopener noreferrer">
-        <span>Открыть на Modrinth</span>
-        <ExternalIcon />
-      </a>
+      {mod.url && (
+        <a className="open-link" href={mod.url} target="_blank" rel="noopener noreferrer">
+          <span>Открыть на Modrinth</span>
+          <ExternalIcon />
+        </a>
+      )}
     </article>
   );
 }
