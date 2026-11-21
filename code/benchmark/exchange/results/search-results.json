@@ -1,0 +1,738 @@
+{
+  "k": 5,
+  "variants": {
+    "ru-лемматизация (базовая)": {
+      "recall": 0.64,
+      "mrr": 0.845
+    },
+    "en-лемматизация (как есть)": {
+      "recall": 0.43666666666666665,
+      "mrr": 0.725
+    },
+    "без лемматизации": {
+      "recall": 0.43666666666666665,
+      "mrr": 0.725
+    }
+  },
+  "per_question": {
+    "Q01": {
+      "recall": 1.0,
+      "rr": 1.0
+    },
+    "Q02": {
+      "recall": 1.0,
+      "rr": 1.0
+    },
+    "Q03": {
+      "recall": 0.75,
+      "rr": 1.0
+    },
+    "Q04": {
+      "recall": 0.25,
+      "rr": 0.2
+    },
+    "Q05": {
+      "recall": 0.6666666666666666,
+      "rr": 1.0
+    },
+    "Q06": {
+      "recall": 1.0,
+      "rr": 1.0
+    },
+    "Q07": {
+      "recall": 1.0,
+      "rr": 1.0
+    },
+    "Q08": {
+      "recall": 0.2,
+      "rr": 0.25
+    },
+    "Q09": {
+      "recall": 0.3333333333333333,
+      "rr": 1.0
+    },
+    "Q10": {
+      "recall": 0.2,
+      "rr": 1.0
+    }
+  },
+  "questions": {
+    "Q01": {
+      "type": "normal",
+      "query": "Покажи постироничные числовые мемы.",
+      "relevant": [
+        "seed-meme-01",
+        "seed-meme-02",
+        "seed-meme-03"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-03",
+          "title": "67",
+          "score": 4.776,
+          "relevant": true
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-01",
+          "title": "39",
+          "score": 4.337,
+          "relevant": true
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-02",
+          "title": "52",
+          "score": 3.808,
+          "relevant": true
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-10",
+          "title": "Он пробрался",
+          "score": 2.324,
+          "relevant": false
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-23",
+          "title": "Работай, чатгпт",
+          "score": 2.296,
+          "relevant": false
+        }
+      ]
+    },
+    "Q02": {
+      "type": "normal",
+      "query": "Дай мне мемов с котами",
+      "relevant": [
+        "seed-meme-09",
+        "seed-meme-10",
+        "seed-meme-14",
+        "seed-meme-27"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-09",
+          "title": "Глупыши",
+          "score": 3.097,
+          "relevant": true
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-15",
+          "title": "Напакостничал",
+          "score": 2.919,
+          "relevant": false
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-27",
+          "title": "Кража мемов",
+          "score": 2.81,
+          "relevant": true
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-10",
+          "title": "Он пробрался",
+          "score": 2.78,
+          "relevant": true
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-14",
+          "title": "Материнская плата и микрочип",
+          "score": 2.592,
+          "relevant": true
+        }
+      ]
+    },
+    "Q03": {
+      "type": "normal",
+      "query": "Подбери мемы-реакции, когда я запутался и не могу понять происходящее или ситуация выглядит странно.",
+      "relevant": [
+        "seed-meme-09",
+        "seed-meme-18",
+        "seed-meme-19",
+        "seed-meme-21"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-19",
+          "title": "Не поняла",
+          "score": 12.82,
+          "relevant": true
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-09",
+          "title": "Глупыши",
+          "score": 10.116,
+          "relevant": true
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-15",
+          "title": "Напакостничал",
+          "score": 9.113,
+          "relevant": false
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-18",
+          "title": "Необычно, зайка",
+          "score": 8.709,
+          "relevant": true
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-20",
+          "title": "Отпусти",
+          "score": 5.876,
+          "relevant": false
+        }
+      ]
+    },
+    "Q04": {
+      "type": "normal",
+      "query": "что отправить человеку, которого постоянно приходится ждать?",
+      "relevant": [
+        "seed-meme-11",
+        "seed-meme-19",
+        "seed-meme-25",
+        "seed-meme-30"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-13",
+          "title": "Мыться",
+          "score": 4.457,
+          "relevant": false
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-29",
+          "title": "Воздухан",
+          "score": 2.938,
+          "relevant": false
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-15",
+          "title": "Напакостничал",
+          "score": 2.657,
+          "relevant": false
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-20",
+          "title": "Отпусти",
+          "score": 2.363,
+          "relevant": false
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-30",
+          "title": "Группа для крутых",
+          "score": 2.169,
+          "relevant": true
+        }
+      ]
+    },
+    "Q05": {
+      "type": "normal",
+      "query": "Какие мемы подойдут, чтобы показать хорошее настроение и довольство после удачи или небольшой проделки?",
+      "relevant": [
+        "seed-meme-12",
+        "seed-meme-15",
+        "seed-meme-28"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-28",
+          "title": "Весёлый",
+          "score": 15.421,
+          "relevant": true
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-15",
+          "title": "Напакостничал",
+          "score": 10.075,
+          "relevant": true
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-17",
+          "title": "Не весёлый",
+          "score": 6.312,
+          "relevant": false
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-24",
+          "title": "Как разговорить домовой чат",
+          "score": 4.238,
+          "relevant": false
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-30",
+          "title": "Группа для крутых",
+          "score": 4.16,
+          "relevant": false
+        }
+      ]
+    },
+    "Q06": {
+      "type": "normal",
+      "query": "Найди мемы для разговора о компьютерных технологиях, микрочипах, написании кода и ChatGPT.",
+      "relevant": [
+        "seed-meme-14",
+        "seed-meme-16",
+        "seed-meme-23"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-16",
+          "title": "Не вайбкодь",
+          "score": 10.23,
+          "relevant": true
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-14",
+          "title": "Материнская плата и микрочип",
+          "score": 5.04,
+          "relevant": true
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-27",
+          "title": "Кража мемов",
+          "score": 4.771,
+          "relevant": false
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-23",
+          "title": "Работай, чатгпт",
+          "score": 4.566,
+          "relevant": true
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-19",
+          "title": "Не поняла",
+          "score": 2.561,
+          "relevant": false
+        }
+      ]
+    },
+    "Q07": {
+      "type": "normal",
+      "query": "Подбери мемы для публикаций в онлайн-сообществе: про групповой чат или что-нибудь для тг-канала или сообщества с мемами",
+      "relevant": [
+        "seed-meme-24",
+        "seed-meme-27",
+        "seed-meme-30"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-30",
+          "title": "Группа для крутых",
+          "score": 10.781,
+          "relevant": true
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-27",
+          "title": "Кража мемов",
+          "score": 9.042,
+          "relevant": true
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-24",
+          "title": "Как разговорить домовой чат",
+          "score": 5.896,
+          "relevant": true
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-02",
+          "title": "52",
+          "score": 5.674,
+          "relevant": false
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-18",
+          "title": "Необычно, зайка",
+          "score": 4.476,
+          "relevant": false
+        }
+      ]
+    },
+    "Q08": {
+      "type": "normal",
+      "query": "Дай мне абсурдных мемов",
+      "relevant": [
+        "seed-meme-03",
+        "seed-meme-05",
+        "seed-meme-08",
+        "seed-meme-13",
+        "seed-meme-29"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-15",
+          "title": "Напакостничал",
+          "score": 2.681,
+          "relevant": false
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-01",
+          "title": "39",
+          "score": 2.398,
+          "relevant": false
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-19",
+          "title": "Не поняла",
+          "score": 2.253,
+          "relevant": false
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-13",
+          "title": "Мыться",
+          "score": 2.162,
+          "relevant": true
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-20",
+          "title": "Отпусти",
+          "score": 2.144,
+          "relevant": false
+        }
+      ]
+    },
+    "Q09": {
+      "type": "normal",
+      "query": "Какой мем отправить, когда случилась неприятность, всё пошло не так или человек грустит",
+      "relevant": [
+        "seed-meme-04",
+        "seed-meme-17",
+        "seed-meme-20"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-04",
+          "title": "Беда",
+          "score": 11.591,
+          "relevant": true
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-12",
+          "title": "Пять минут назад",
+          "score": 6.778,
+          "relevant": false
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-13",
+          "title": "Мыться",
+          "score": 6.144,
+          "relevant": false
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-27",
+          "title": "Кража мемов",
+          "score": 4.799,
+          "relevant": false
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-29",
+          "title": "Воздухан",
+          "score": 4.22,
+          "relevant": false
+        }
+      ]
+    },
+    "Q10": {
+      "type": "normal",
+      "query": "Покажи мемы с животными",
+      "relevant": [
+        "seed-meme-04",
+        "seed-meme-09",
+        "seed-meme-10",
+        "seed-meme-14",
+        "seed-meme-24"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-10",
+          "title": "Он пробрался",
+          "score": 3.702,
+          "relevant": true
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-23",
+          "title": "Работай, чатгпт",
+          "score": 2.522,
+          "relevant": false
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-27",
+          "title": "Кража мемов",
+          "score": 2.515,
+          "relevant": false
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-28",
+          "title": "Весёлый",
+          "score": 2.474,
+          "relevant": false
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-17",
+          "title": "Не весёлый",
+          "score": 2.422,
+          "relevant": false
+        }
+      ]
+    },
+    "T01": {
+      "type": "trap",
+      "query": "Какой точный рецепт борща с пропорциями свёклы, капусты и мяса приведён в базе?",
+      "relevant": [],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-27",
+          "title": "Кража мемов",
+          "score": 3.996,
+          "relevant": false
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-29",
+          "title": "Воздухан",
+          "score": 3.062,
+          "relevant": false
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-06",
+          "title": "До связи",
+          "score": 2.632,
+          "relevant": false
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-15",
+          "title": "Напакостничал",
+          "score": 1.172,
+          "relevant": false
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-19",
+          "title": "Не поняла",
+          "score": 1.155,
+          "relevant": false
+        }
+      ]
+    },
+    "T02": {
+      "type": "trap",
+      "query": "Прогноз погоды на завтра ",
+      "relevant": [],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-21",
+          "title": "Почему",
+          "score": 0.449,
+          "relevant": false
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-04",
+          "title": "Беда",
+          "score": 0.407,
+          "relevant": false
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-13",
+          "title": "Мыться",
+          "score": 0.393,
+          "relevant": false
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-02",
+          "title": "52",
+          "score": 0.38,
+          "relevant": false
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-10",
+          "title": "Он пробрался",
+          "score": 0.373,
+          "relevant": false
+        }
+      ]
+    },
+    "T03": {
+      "type": "trap",
+      "query": "Как настроить VLAN-соединение?",
+      "relevant": [],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-24",
+          "title": "Как разговорить домовой чат",
+          "score": 1.753,
+          "relevant": false
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-28",
+          "title": "Весёлый",
+          "score": 1.237,
+          "relevant": false
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-17",
+          "title": "Не весёлый",
+          "score": 1.211,
+          "relevant": false
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-01",
+          "title": "39",
+          "score": 1.179,
+          "relevant": false
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-26",
+          "title": "Трудовой договор",
+          "score": 1.155,
+          "relevant": false
+        }
+      ]
+    },
+    "T04": {
+      "type": "trap",
+      "query": "В каком сезоне и какой серии сериала «Ганнибал» умирает гг?",
+      "relevant": [],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-30",
+          "title": "Группа для крутых",
+          "score": 4.069,
+          "relevant": false
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-27",
+          "title": "Кража мемов",
+          "score": 3.684,
+          "relevant": false
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-15",
+          "title": "Напакостничал",
+          "score": 0.934,
+          "relevant": false
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-19",
+          "title": "Не поняла",
+          "score": 0.912,
+          "relevant": false
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-10",
+          "title": "Он пробрался",
+          "score": 0.88,
+          "relevant": false
+        }
+      ]
+    },
+    "T05": {
+      "type": "trap",
+      "query": "Реши за меня пример: 2+2 =",
+      "relevant": [],
+      "results": [
+        {
+          "rank": 1,
+          "doc": "seed-meme-07",
+          "title": "Добрый гангстер",
+          "score": 2.43,
+          "relevant": false
+        },
+        {
+          "rank": 2,
+          "doc": "seed-meme-19",
+          "title": "Не поняла",
+          "score": 2.253,
+          "relevant": false
+        },
+        {
+          "rank": 3,
+          "doc": "seed-meme-15",
+          "title": "Напакостничал",
+          "score": 2.211,
+          "relevant": false
+        },
+        {
+          "rank": 4,
+          "doc": "seed-meme-20",
+          "title": "Отпусти",
+          "score": 2.144,
+          "relevant": false
+        },
+        {
+          "rank": 5,
+          "doc": "seed-meme-29",
+          "title": "Воздухан",
+          "score": 1.952,
+          "relevant": false
+        }
+      ]
+    }
+  }
+}
